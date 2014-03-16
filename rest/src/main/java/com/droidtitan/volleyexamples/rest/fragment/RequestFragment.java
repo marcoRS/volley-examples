@@ -33,13 +33,13 @@ public class RequestFragment extends Fragment implements OnClickListener {
 
     public static final String DOWNLOAD_TAG = "AirQualityTag";
 
-    private TextView titleTextView;
-    private TextView recommendationTextView;
+    private TextView airQualityTextView;
+    private TextView tempartureTextView;
     private ViewFlipper rootView;
 
     private VolleyApp app;
-    private AirQualityResponse response;
 
+    private AirQualityResponse response;
     @Inject RequestQueue requestQueue;
 
     @Override
@@ -67,8 +67,8 @@ public class RequestFragment extends Fragment implements OnClickListener {
 
         rootView = (ViewFlipper) inflater.inflate(R.layout.fragment_request, container, false);
 
-        titleTextView = (TextView) rootView.findViewById(R.id.qualityTextView);
-        recommendationTextView = (TextView) rootView.findViewById(R.id.recommendationTextView);
+        airQualityTextView = (TextView) rootView.findViewById(R.id.qualityTextView);;
+        tempartureTextView = (TextView) rootView.findViewById(R.id.temperatureTextView);
         rootView.findViewById(R.id.retryButton).setOnClickListener(this);
 
         if (response == null) {
@@ -100,20 +100,23 @@ public class RequestFragment extends Fragment implements OnClickListener {
         requestQueue.add(request);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        requestQueue.cancelAll(DOWNLOAD_TAG);
+    }
+
     public void onEventMainThread(AirQualityEvent event) {
         VolleyError error = event.getVolleyError();
         response = event.getResponse();
 
         if (error == null) {
             rootView.setDisplayedChild(1);
+            tempartureTextView.setText(response.getWeather().getTemperature() + " \u2103");
+
             AirQuality quality = response.getAirQuality();
-
             String category = quality.getCategory();
-            titleTextView.setText(category.substring(0, 1).toUpperCase() + category.substring(1));
-            String recommendation = quality.getRecommendation();
-            recommendationTextView.setText(recommendation.substring(0, 1).toUpperCase() +
-                    recommendation.substring(1).toLowerCase());
-
+            airQualityTextView.setText(category.substring(0, 1).toUpperCase() + category.substring(1));
         } else {
             rootView.setDisplayedChild(2);
             Toast.makeText(app, VolleyHelper.getMessage(error, app), Toast.LENGTH_LONG).show();

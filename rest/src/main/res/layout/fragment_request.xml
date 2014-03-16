@@ -5,38 +5,54 @@
     tools:context="com.droidtitan.volleyexamples.rest.MainActivity.WeatherFragment">
 
     <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:id="@+id/progressBar" />
+        android:layout_gravity="center" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/side_margin">
-
-        <TextView
-            android:id="@+id/qualityTextView"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        android:layout_margin="@dimen/side_margin"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="Temperature in Mexico City"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/recommendationTextView"
-            android:layout_below="@+id/qualityTextView"
-            android:textColor="?android:textColorTertiary"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-    </RelativeLayout>
+            android:textColor="?android:textColorTertiary" />
+
+        <TextView
+            android:id="@+id/temperatureTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/side_margin"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/side_margin"
+            android:fontFamily="sans-serif"
+            android:text="Air Quality"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="?android:textColorTertiary" />
+
+        <TextView
+            android:id="@+id/qualityTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
 
     <Button
+        android:id="@+id/retryButton"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Try again?"
-        android:id="@+id/retryButton" />
+        android:text="Try again?" />
 
 </ViewFlipper>
