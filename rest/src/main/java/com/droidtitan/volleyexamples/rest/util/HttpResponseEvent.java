@@ -6,14 +6,6 @@ public class HttpResponseEvent<T> {
     private T response;
     private VolleyError volleyError;
 
-    public HttpResponseEvent(T response) {
-        this.response = response;
-    }
-
-    public HttpResponseEvent(VolleyError error) {
-        volleyError = error;
-    }
-
     public T getResponse() {
         return response;
     }

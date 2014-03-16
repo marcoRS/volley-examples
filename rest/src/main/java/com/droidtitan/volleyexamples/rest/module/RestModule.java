@@ -4,6 +4,8 @@ import android.content.Context;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.droidtitan.volleyexamples.rest.fragment.ImageLoaderFragment;
+import com.droidtitan.volleyexamples.rest.fragment.NetworkImageFragment;
 import com.droidtitan.volleyexamples.rest.fragment.RequestFragment;
 import com.droidtitan.volleyexamples.rest.util.LruBitmapCache;
 import com.droidtitan.volleyexamples.rest.util.OkHttpStack;
@@ -11,10 +13,24 @@ import com.squareup.okhttp.OkHttpClient;
 import dagger.Module;
 import dagger.Provides;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
-@Module(injects = RequestFragment.class, library = true, complete = false, includes = ContextModule.class)
+@Module(injects = {RequestFragment.class, NetworkImageFragment.class, ImageLoaderFragment.class},
+        library = true, complete = false)
 public class RestModule {
+
+    private Context context;
+
+    public RestModule(Context appContext) {
+        context = appContext;
+    }
+
+    @Provides
+    @Named("App")
+    public Context provideAppContext() {
+        return context;
+    }
 
     @Singleton
     @Provides
@@ -24,7 +40,7 @@ public class RestModule {
 
     @Provides
     @Singleton
-    public RequestQueue provideRequestQueue(OkHttpClient okHttpClient, Context context) {
+    public RequestQueue provideRequestQueue(OkHttpClient okHttpClient, @Named("App") Context context) {
         /** Set up to use OkHttp */
         return Volley.newRequestQueue(context, new OkHttpStack(okHttpClient));
     }

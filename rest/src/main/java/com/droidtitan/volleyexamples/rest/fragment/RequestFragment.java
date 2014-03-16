@@ -12,6 +12,8 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.droidtitan.volleyexamples.rest.R;
 import com.droidtitan.volleyexamples.rest.VolleyApp;
@@ -29,12 +31,15 @@ public class RequestFragment extends Fragment implements OnClickListener {
 
     public static final String TAG = RequestFragment.class.getName();
 
+    public static final String DOWNLOAD_TAG = "AirQualityTag";
+
     private TextView titleTextView;
     private TextView recommendationTextView;
     private ViewFlipper rootView;
 
     private VolleyApp app;
     private AirQualityResponse response;
+
     @Inject RequestQueue requestQueue;
 
     @Override
@@ -57,9 +62,11 @@ public class RequestFragment extends Fragment implements OnClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
+        getActivity().getActionBar().setTitle(R.string.json_request_example);
+
         rootView = (ViewFlipper) inflater.inflate(R.layout.fragment_request, container, false);
+
         titleTextView = (TextView) rootView.findViewById(R.id.qualityTextView);
         recommendationTextView = (TextView) rootView.findViewById(R.id.recommendationTextView);
         rootView.findViewById(R.id.retryButton).setOnClickListener(this);
@@ -73,14 +80,27 @@ public class RequestFragment extends Fragment implements OnClickListener {
 
     private void startRequest() {
         final String url = RestUtils.getAirQualityUrl();
-        final GsonRequest<AirQualityResponse> rq = RestUtils.getGsonRequest(AirQualityResponse.class,
-                Method.GET, url, null);
+        final GsonRequest<AirQualityResponse> request = new GsonRequest<AirQualityResponse>(Method.GET,
+                url, AirQualityResponse.class, null,
+                new Listener<AirQualityResponse>() {
+                    @Override
+                    public void onResponse(AirQualityResponse response) {
+                        Bus.postEvent(new AirQualityEvent().setResponse(response));
+                    }
+                }, new ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Bus.postEvent(new AirQualityEvent().setVolleyError(error));
+            }
+        }
+        );
 
-        requestQueue.add(rq);
+        request.setTag(DOWNLOAD_TAG);
+        request.setShouldCache(false);
+        requestQueue.add(request);
     }
 
-    public void onEventMainThread(HttpResponseEvent<AirQualityResponse> event) {
-
+    public void onEventMainThread(AirQualityEvent event) {
         VolleyError error = event.getVolleyError();
         response = event.getResponse();
 
@@ -103,5 +123,8 @@ public class RequestFragment extends Fragment implements OnClickListener {
     @Override
     public void onClick(View v) {
         startRequest();
+    }
+
+    public class AirQualityEvent extends HttpResponseEvent<AirQualityResponse> {
     }
 }

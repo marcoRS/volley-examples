@@ -7,5 +7,7 @@
     <string name="generic_error">An error occurred. Try again or check settings.</string>
     <string name="no_data_connection">No data connection.</string>
     <string name="no_results_found">No no results found.</string>
-
+    <string name="json_request_example">Json Request with Gson</string>
+    <string name="image_loader_example">NetworkImage in XML</string>
+    <string name="networkimage_example">ImageLoader with ImageView</string>
 </resources>

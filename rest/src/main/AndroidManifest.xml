@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.droidtitan.volleyexamples.rest">
+<manifest
+    package="com.droidtitan.volleyexamples.rest"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".VolleyApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:name=".VolleyApp"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"

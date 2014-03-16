@@ -1,24 +1,28 @@
 package com.droidtitan.volleyexamples.rest;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.view.Menu;
+import android.support.v4.app.FragmentManager.OnBackStackChangedListener;
 import android.view.MenuItem;
 import com.droidtitan.volleyexamples.rest.fragment.ExamplesListFragment;
 import com.droidtitan.volleyexamples.rest.fragment.ExamplesListFragment.AttachFragmentEvent;
 import com.droidtitan.volleyexamples.rest.util.Bus;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements OnBackStackChangedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FragmentManager fm = getSupportFragmentManager();
+        fm.addOnBackStackChangedListener(this);
+
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
+            fm.beginTransaction()
                     .add(R.id.container, new ExamplesListFragment())
                     .commit();
         }
@@ -47,24 +51,27 @@ public class MainActivity extends FragmentActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == android.R.id.home) {
+            getSupportFragmentManager().popBackStack();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackStackChanged() {
+        FragmentManager fm = getSupportFragmentManager();
+        int count = fm.getBackStackEntryCount();
+        ActionBar actionBar = getActionBar();
+        if (count > 0) {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        } else {
+            actionBar.setHomeButtonEnabled(false);
+            actionBar.setDisplayHomeAsUpEnabled(false);
+        }
+    }
 }
