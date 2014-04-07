@@ -4,7 +4,7 @@ apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 apply plugin: 'pmd'
 
-check.dependsOn 'findbugs','pmd'
+check.dependsOn 'findbugs','pmd','checkstyle'
 
 android {
     compileSdkVersion 19
@@ -43,22 +43,13 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 }
 
-checkstyle {
-    configFile project.file('../config/quality/checkstyle/checkstyle.xml')
-    ignoreFailures = false
-    showViolations = true
-}
+ task checkstyle(type: Checkstyle) {
+        configFile file('../config/quality/checkstyle/checkstyle.xml')
+        source 'src/main/java'
+        include '**/*.java'
+        exclude '**/gen/**'
 
-android.applicationVariants.all { variant ->
-    def name = variant.buildType.name
-
-    def checkstyle = project.tasks.create "checkstyle${name.capitalize()}", Checkstyle
-    checkstyle.dependsOn variant.javaCompile
-    checkstyle.source variant.javaCompile.source
-    checkstyle.classpath = project.fileTree(variant.javaCompile.destinationDir)
-    checkstyle.exclude('**/BuildConfig.java')
-    checkstyle.exclude('**/R.java')
-    project.tasks.getByName("check").dependsOn checkstyle
+        classpath = files()
 }
 
 task findbugs(type: FindBugs) {
