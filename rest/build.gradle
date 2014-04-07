@@ -2,8 +2,9 @@ apply plugin: 'android-sdk-manager'
 apply plugin: 'android'
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
+apply plugin: 'pmd'
 
-check.dependsOn 'findbugs'
+check.dependsOn 'findbugs','pmd'
 
 android {
     compileSdkVersion 19
@@ -82,3 +83,18 @@ task findbugs(type: FindBugs) {
 }
 
 
+task pmd(type: Pmd) {
+
+    ruleSetFiles = files('../config/quality/pmd/pmd-ruleset.xml')
+    ignoreFailures = true
+    ruleSets = ["basic", "braces", "strings"]
+    
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**' 
+
+    reports {
+        xml.enabled = true
+        html.enabled = false
+    }  
+}
