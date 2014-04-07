@@ -4,7 +4,7 @@ apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 apply plugin: 'pmd'
 
-check.dependsOn 'findbugs','pmd','checkstyle'
+check.dependsOn 'checkstyle', 'findbugs', 'pmd'
 
 android {
     compileSdkVersion 19
@@ -43,13 +43,13 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 }
 
- task checkstyle(type: Checkstyle) {
-        configFile file('../config/quality/checkstyle/checkstyle.xml')
-        source 'src'
-        include '**/*.java'
-        exclude '**/gen/**'
+task checkstyle(type: Checkstyle) {
+    configFile file('../config/quality/checkstyle/checkstyle.xml')
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
 
-        classpath = files()
+    classpath = files()
 }
 
 task findbugs(type: FindBugs) {
@@ -67,25 +67,24 @@ task findbugs(type: FindBugs) {
         xml {
             destination "$project.buildDir/reports/findbugs/findbugs-${project.name}.xml"
             xml.withMessages true
-        } 
+        }
     }
 
     classpath = files()
 }
-
 
 task pmd(type: Pmd) {
 
     ruleSetFiles = files('../config/quality/pmd/pmd-ruleset.xml')
     ignoreFailures = true
     ruleSets = ["basic", "braces", "strings"]
-    
+
     source 'src'
     include '**/*.java'
-    exclude '**/gen/**' 
+    exclude '**/gen/**'
 
     reports {
         xml.enabled = true
         html.enabled = false
-    }  
+    }
 }
