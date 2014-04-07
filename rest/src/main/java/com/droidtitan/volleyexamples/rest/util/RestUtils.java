@@ -2,8 +2,8 @@ package com.droidtitan.volleyexamples.rest.util;
 
 public final class RestUtils {
 
-    public static String BERKELEY_MAP_URL = "http://maps.googleapis.com/maps/api/staticmap?center=Berkeley,CA&zoom=15&size=1000x400&sensor=false";
-    public static String SAN_FRAN_MAP_URL = "http://maps.googleapis.com/maps/api/staticmap?center=San+Francisco,CA&zoom=15&size=1000x400&sensor=false";
+    public static final String BERKELEY_MAP_URL = "http://maps.googleapis.com/maps/api/staticmap?center=Berkeley,CA&zoom=15&size=1000x400&sensor=false";
+    public static final String SAN_FRAN_MAP_URL = "http://maps.googleapis.com/maps/api/staticmap?center=San+Francisco,CA&zoom=15&size=1000x400&sensor=false";
 
     /**
      * Updated every hour.

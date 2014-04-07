@@ -1,6 +1,9 @@
 apply plugin: 'android-sdk-manager'
 apply plugin: 'android'
 apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+
+check.dependsOn 'findbugs'
 
 android {
     compileSdkVersion 19
@@ -54,6 +57,27 @@ android.applicationVariants.all { variant ->
     checkstyle.exclude('**/BuildConfig.java')
     checkstyle.exclude('**/R.java')
     project.tasks.getByName("check").dependsOn checkstyle
+}
+
+task findbugs(type: FindBugs) {
+    ignoreFailures = true
+    effort = "max"
+    reportLevel = "high"
+    excludeFilter = new File("${project.projectDir}/../config/quality/findbugs/findbugs-filter.xml")
+    classes = files("$project.buildDir/classes")
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml {
+            destination "$project.buildDir/reports/findbugs/findbugs-${project.name}.xml"
+            xml.withMessages true
+        } 
+    }
+
+    classpath = files()
 }
 
 

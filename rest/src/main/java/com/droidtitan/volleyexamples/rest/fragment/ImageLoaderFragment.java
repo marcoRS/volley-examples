@@ -23,7 +23,7 @@ import javax.inject.Inject;
 
 public class ImageLoaderFragment extends Fragment {
 
-    public static String TAG = ImageLoaderFragment.class.getName();
+    public static final String TAG = ImageLoaderFragment.class.getName();
 
     private VolleyApp app;
     @Inject ImageLoader imageLoader;
