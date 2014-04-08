@@ -77,8 +77,10 @@ public class GsonRequest<T> extends Request<T> {
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
         try {
-            String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-            return Response.success(gson.fromJson(json, clazz), HttpHeaderParser.parseCacheHeaders(response));
+            String json = new String(response.data,
+                    HttpHeaderParser.parseCharset(response.headers));
+            return Response.success(gson.fromJson(json, clazz),
+                    HttpHeaderParser.parseCacheHeaders(response));
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));
         } catch (JsonSyntaxException e) {

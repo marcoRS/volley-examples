@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:text="Temperature in Mexico City"
+            android:text="@string/temperature_in_mexico_city"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="?android:textColorTertiary" />
 
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/side_margin"
             android:fontFamily="sans-serif"
-            android:text="Air Quality"
+            android:text="@string/air_quality"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="?android:textColorTertiary" />
 
@@ -53,6 +53,6 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Try again?" />
+        android:text="@string/try_again" />
 
 </ViewFlipper>

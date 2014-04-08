@@ -26,6 +26,7 @@ import com.droidtitan.volleyexamples.rest.util.RestUtils;
 import com.droidtitan.volleyexamples.rest.util.VolleyHelper;
 
 import javax.inject.Inject;
+import java.util.Locale;
 
 public class RequestFragment extends Fragment implements OnClickListener {
 
@@ -67,7 +68,7 @@ public class RequestFragment extends Fragment implements OnClickListener {
 
         rootView = (ViewFlipper) inflater.inflate(R.layout.fragment_request, container, false);
 
-        airQualityTextView = (TextView) rootView.findViewById(R.id.qualityTextView);;
+        airQualityTextView = (TextView) rootView.findViewById(R.id.qualityTextView);
         tempartureTextView = (TextView) rootView.findViewById(R.id.temperatureTextView);
         rootView.findViewById(R.id.retryButton).setOnClickListener(this);
 
@@ -80,7 +81,7 @@ public class RequestFragment extends Fragment implements OnClickListener {
 
     private void startRequest() {
         final String url = RestUtils.getAirQualityUrl();
-        final GsonRequest<AirQualityResponse> request = new GsonRequest<AirQualityResponse>(Method.GET,
+        final GsonRequest<AirQualityResponse> rq = new GsonRequest<AirQualityResponse>(Method.GET,
                 url, AirQualityResponse.class, null,
                 new Listener<AirQualityResponse>() {
                     @Override
@@ -95,9 +96,9 @@ public class RequestFragment extends Fragment implements OnClickListener {
         }
         );
 
-        request.setTag(DOWNLOAD_TAG);
-        request.setShouldCache(false);
-        requestQueue.add(request);
+        rq.setTag(DOWNLOAD_TAG);
+        rq.setShouldCache(false);
+        requestQueue.add(rq);
     }
 
     @Override
@@ -116,7 +117,8 @@ public class RequestFragment extends Fragment implements OnClickListener {
 
             AirQuality quality = response.getAirQuality();
             String category = quality.getCategory();
-            airQualityTextView.setText(category.substring(0, 1).toUpperCase() + category.substring(1));
+            airQualityTextView.setText(category.substring(0, 1).toUpperCase(Locale.US)
+                    + category.substring(1));
         } else {
             rootView.setDisplayedChild(2);
             Toast.makeText(app, VolleyHelper.getMessage(error, app), Toast.LENGTH_LONG).show();

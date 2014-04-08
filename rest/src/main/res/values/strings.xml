@@ -10,4 +10,8 @@
     <string name="json_request_example">Json Request with Gson</string>
     <string name="image_loader_example">NetworkImage in XML</string>
     <string name="networkimage_example">ImageLoader with ImageView</string>
+    <string name="error_loading_image">Error loading image.</string>
+    <string name="air_quality">Air Quality</string>
+    <string name="try_again">Try again?</string>
+    <string name="temperature_in_mexico_city">Temperature in Mexico City</string>
 </resources>

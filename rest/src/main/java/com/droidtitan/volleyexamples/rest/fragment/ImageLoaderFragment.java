@@ -39,7 +39,8 @@ public class ImageLoaderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
         getActivity().getActionBar().setTitle(R.string.image_loader_example);
 
-        final ViewFlipper root = (ViewFlipper) inflater.inflate(R.layout.fragment_image_loader, container, false);
+        final ViewFlipper root = (ViewFlipper) inflater.inflate(R.layout.fragment_image_loader,
+                container, false);
         final ImageView map = (ImageView) root.findViewById(R.id.mapImageView);
 
         imageLoader.get(RestUtils.SAN_FRAN_MAP_URL, new ImageListener() {

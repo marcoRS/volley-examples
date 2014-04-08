@@ -46,7 +46,10 @@ public class MainActivity extends FragmentActivity implements OnBackStackChanged
 
         if (fm.findFragmentByTag(tag) == null) {
             Fragment fragment = Fragment.instantiate(this, tag);
-            fm.beginTransaction().replace(R.id.container, fragment, tag).addToBackStack(null).commit();
+            fm.beginTransaction()
+                    .replace(R.id.container, fragment, tag)
+                    .addToBackStack(null)
+                    .commit();
         }
     }
 

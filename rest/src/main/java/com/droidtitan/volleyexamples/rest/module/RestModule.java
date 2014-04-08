@@ -16,7 +16,7 @@ import dagger.Provides;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-@Module(injects = {RequestFragment.class, NetworkImageFragment.class, ImageLoaderFragment.class},
+@Module(injects = {RequestFragment.class, NetworkImageFragment.class, ImageLoaderFragment.class },
         library = true, complete = false)
 public class RestModule {
 
@@ -40,7 +40,8 @@ public class RestModule {
 
     @Provides
     @Singleton
-    public RequestQueue provideRequestQueue(OkHttpClient okHttpClient, @Named("App") Context context) {
+    public RequestQueue provideRequestQueue(OkHttpClient okHttpClient,
+                                            @Named("App") Context context) {
         /** Set up to use OkHttp */
         return Volley.newRequestQueue(context, new OkHttpStack(okHttpClient));
     }

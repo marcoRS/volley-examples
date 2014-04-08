@@ -86,7 +86,7 @@ public final class VolleyHelper {
                         HashMap<String, String> result = new Gson()
                                 .fromJson(new String(response.data, Charset.forName("UTF-8")),
                                         new TypeToken<Map<String, String>>() {
-                                        }.getType());
+                                        } .getType());
 
                         if (result != null && result.containsKey("error")) {
                             return result.get("error");

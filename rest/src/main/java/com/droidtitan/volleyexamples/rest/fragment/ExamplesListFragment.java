@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class ExamplesListFragment extends Fragment implements OnItemClickListener {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
         ListView listView = new ListView(getActivity());
 
         ArrayList<String> examples = new ArrayList<String>();
@@ -25,7 +25,8 @@ public class ExamplesListFragment extends Fragment implements OnItemClickListene
         examples.add(getString(R.string.networkimage_example));
         examples.add(getString(R.string.image_loader_example));
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.row_example, examples);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                R.layout.row_example, examples);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
         return listView;
