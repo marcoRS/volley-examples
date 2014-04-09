@@ -37,7 +37,7 @@ public class NetworkImageFragment extends Fragment {
         NetworkImageView imageView = (NetworkImageView) root.findViewById(R.id.mapNetworkImageView);
         // imageView.setErrorImageResId(R.drawable.my_error_image);
         // imageView.setDefaultImageResId(R.drawable.my_default_image);
-        imageView.setImageUrl(RestUtils.BERKELEY_MAP_URL, imageLoader);
+        imageView.setImageUrl(RestUtils.getBerkeleyMapUrl(), imageLoader);
 
         return root;
     }

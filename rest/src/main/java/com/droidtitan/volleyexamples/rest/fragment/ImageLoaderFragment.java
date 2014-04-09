@@ -43,7 +43,7 @@ public class ImageLoaderFragment extends Fragment {
                 container, false);
         final ImageView map = (ImageView) root.findViewById(R.id.mapImageView);
 
-        imageLoader.get(RestUtils.SAN_FRAN_MAP_URL, new ImageListener() {
+        imageLoader.get(RestUtils.getSfMapUrl(), new ImageListener() {
             @Override
             public void onResponse(ImageContainer imageContainer, boolean isImmediate) {
                 Bitmap bitmap = imageContainer.getBitmap();
