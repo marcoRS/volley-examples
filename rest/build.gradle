@@ -3,21 +3,21 @@ apply plugin: 'android'
 apply from: '../config/quality.gradle'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    compileSdkVersion Integer.parseInt(project.ANDROID_COMPILE_SDK_VERSION)
+    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion Integer.parseInt(project.ANDROID_MIN_SDK)
+        targetSdkVersion Integer.parseInt(project.ANDROID_TARGET_SDK_VERSION)
+        versionName project.VERSION_NAME
+        versionCode Integer.parseInt(project.VERSION_CODE)
+    }
 
     lintOptions {
         abortOnError false
         disable 'InvalidPackage'
     }
 
-    defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 19
-        versionCode 1
-        versionName "1.0"
-    }
-    
     buildTypes {
         release {
             runProguard false
@@ -27,15 +27,13 @@ android {
 }
 
 dependencies {
-
     compile 'com.android.support:support-v4:19.0.+'
     compile 'com.mcxiaoke.volley:library-aar:1.0.+'
-    compile 'com.squareup.dagger:dagger:1.2.1'
-    provided 'com.squareup.dagger:dagger-compiler:1.2.1'
-    compile 'org.apache.commons:commons-lang3:3.2.1'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'de.greenrobot:eventbus:2.2.0'
     compile 'com.squareup.okhttp:okhttp:1.3.0'
+    compile 'com.squareup.dagger:dagger:1.2.1'
+    provided 'com.squareup.dagger:dagger-compiler:1.2.1'
 
     compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 }
