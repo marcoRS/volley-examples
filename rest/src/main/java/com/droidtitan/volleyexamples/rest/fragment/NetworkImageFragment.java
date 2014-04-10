@@ -14,7 +14,7 @@ import com.droidtitan.volleyexamples.rest.util.RestUtils;
 
 import javax.inject.Inject;
 
-public class NetworkImageFragment extends Fragment {
+public class NetworkImageFragment extends Fragment 
 
     public static final String TAG = NetworkImageFragment.class.getName();
 
