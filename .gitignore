@@ -42,6 +42,7 @@ out
 
 # Gradle 
 .gradle
+build
 
 # Misc.
 *.DS_Store
