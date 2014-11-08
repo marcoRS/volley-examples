@@ -48,7 +48,7 @@ public final class VolleyHelper {
      * @return
      */
     private static boolean isNetworkProblem(Object error) {
-        return (error instanceof NetworkError) || (error instanceof NoConnectionError);
+        return error instanceof NetworkError || error instanceof NoConnectionError;
     }
 
     /**
@@ -58,7 +58,7 @@ public final class VolleyHelper {
      * @return
      */
     private static boolean isServerProblem(Object error) {
-        return (error instanceof ServerError) || (error instanceof AuthFailureError);
+        return error instanceof ServerError || error instanceof AuthFailureError;
     }
 
     /**
