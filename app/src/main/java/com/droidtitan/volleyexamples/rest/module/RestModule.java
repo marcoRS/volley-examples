@@ -10,6 +10,8 @@ import com.droidtitan.volleyexamples.rest.fragment.RequestFragment;
 import com.droidtitan.volleyexamples.rest.util.LruBitmapCache;
 import com.droidtitan.volleyexamples.rest.util.OkHttpStack;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.OkUrlFactory;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -38,12 +40,18 @@ public class RestModule {
         return new OkHttpClient();
     }
 
+    @Singleton
+    @Provides
+    public OkUrlFactory provideOkUrlFactory(OkHttpClient okHttpClient) {
+        return new OkUrlFactory(okHttpClient);
+    }
+
     @Provides
     @Singleton
-    public RequestQueue provideRequestQueue(OkHttpClient okHttpClient,
+    public RequestQueue provideRequestQueue(OkUrlFactory okUrlFactory,
                                             @Named("App") Context context) {
         /** Set up to use OkHttp */
-        return Volley.newRequestQueue(context, new OkHttpStack(okHttpClient));
+        return Volley.newRequestQueue(context, new OkHttpStack(okUrlFactory));
     }
 
     @Provides
