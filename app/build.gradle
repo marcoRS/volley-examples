@@ -27,12 +27,12 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:21.0.3'
-    compile 'com.mcxiaoke.volley:library:1.0.10'
+    compile 'com.android.support:support-v4:22.0.0'
+    compile 'com.mcxiaoke.volley:library:1.0.15'
     compile 'com.google.code.gson:gson:2.3'
     compile 'de.greenrobot:eventbus:2.2.1'
-    compile 'com.squareup.okhttp:okhttp:2.0.0'
-    compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
+    compile 'com.squareup.okhttp:okhttp:2.3.0'
+  compile 'com.squareup.okhttp:okhttp-urlconnection:2.3.0'
     compile 'com.squareup.dagger:dagger:1.2.2'
     provided 'com.squareup.dagger:dagger-compiler:1.2.2'
 }
