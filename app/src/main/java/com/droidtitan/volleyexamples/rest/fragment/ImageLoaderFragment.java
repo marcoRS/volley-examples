@@ -15,7 +15,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageContainer;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.droidtitan.volleyexamples.rest.R;
-import com.droidtitan.volleyexamples.rest.VolleyApp;
+import com.droidtitan.volleyexamples.rest.App;
 import com.droidtitan.volleyexamples.rest.util.RestUtils;
 import com.droidtitan.volleyexamples.rest.util.VolleyHelper;
 
@@ -25,14 +25,14 @@ public class ImageLoaderFragment extends Fragment {
 
     public static final String TAG = ImageLoaderFragment.class.getName();
 
-    private VolleyApp app;
+    private App app;
     @Inject ImageLoader imageLoader;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        app = (VolleyApp) activity.getApplication();
-        app.inject(this);
+        app = (App) activity.getApplication();
+        app.appComponent().inject(this);
     }
 
     @Override

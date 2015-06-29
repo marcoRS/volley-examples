@@ -16,7 +16,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.droidtitan.volleyexamples.rest.R;
-import com.droidtitan.volleyexamples.rest.VolleyApp;
+import com.droidtitan.volleyexamples.rest.App;
 import com.droidtitan.volleyexamples.rest.model.air.AirQuality;
 import com.droidtitan.volleyexamples.rest.model.air.AirQualityResponse;
 import com.droidtitan.volleyexamples.rest.util.Bus;
@@ -38,7 +38,7 @@ public class RequestFragment extends Fragment implements OnClickListener {
     private TextView tempartureTextView;
     private ViewFlipper rootView;
 
-    private VolleyApp app;
+    private App app;
 
     private AirQualityResponse response;
     @Inject RequestQueue requestQueue;
@@ -46,8 +46,8 @@ public class RequestFragment extends Fragment implements OnClickListener {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        app = (VolleyApp) activity.getApplication();
-        app.inject(this);
+        app = (App) activity.getApplication();
+        app.appComponent().inject(this);
     }
 
     @Override

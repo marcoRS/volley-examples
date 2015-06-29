@@ -1,25 +1,22 @@
-package com.droidtitan.volleyexamples.rest.module;
+package com.droidtitan.volleyexamples.rest.di;
 
 import android.content.Context;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-import com.droidtitan.volleyexamples.rest.fragment.ImageLoaderFragment;
-import com.droidtitan.volleyexamples.rest.fragment.NetworkImageFragment;
-import com.droidtitan.volleyexamples.rest.fragment.RequestFragment;
 import com.droidtitan.volleyexamples.rest.util.LruBitmapCache;
 import com.droidtitan.volleyexamples.rest.util.OkHttpStack;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.OkUrlFactory;
 
-import dagger.Module;
-import dagger.Provides;
-
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-@Module(injects = {RequestFragment.class, NetworkImageFragment.class, ImageLoaderFragment.class },
-        library = true, complete = false)
+import dagger.Module;
+import dagger.Provides;
+
+@Module
 public class RestModule {
 
     private Context context;
@@ -30,6 +27,7 @@ public class RestModule {
 
     @Provides
     @Named("App")
+    @Singleton
     public Context provideAppContext() {
         return context;
     }

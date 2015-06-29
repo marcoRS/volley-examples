@@ -6,10 +6,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.droidtitan.volleyexamples.rest.App;
 import com.droidtitan.volleyexamples.rest.R;
-import com.droidtitan.volleyexamples.rest.VolleyApp;
 import com.droidtitan.volleyexamples.rest.util.RestUtils;
 
 import javax.inject.Inject;
@@ -18,14 +19,13 @@ public class NetworkImageFragment extends Fragment {
 
     public static final String TAG = NetworkImageFragment.class.getName();
 
-    @Inject ImageLoader imageLoader;
+    @Inject
+    ImageLoader imageLoader;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
-        VolleyApp app = (VolleyApp) activity.getApplication();
-        app.inject(this);
+        App.from(getActivity()).appComponent().inject(this);
     }
 
     @Override
