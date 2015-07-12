@@ -8,18 +8,13 @@ import com.droidtitan.volleyexamples.rest.App
 import com.droidtitan.volleyexamples.rest.di.AppComponent
 
 fun Fragment.setActionBarTitle(@StringRes title: Int) {
-    return (getActivity() as AppCompatActivity).getSupportActionBar().setTitle(title);
+    (getActivity() as? AppCompatActivity)?.getSupportActionBar()?.setTitle(title)
 }
 
 fun Fragment.withComponent(): AppComponent {
-    return (getActivity().getApplicationContext() as App).appComponent();
+    return (getActivity().getApplicationContext() as App).appComponent()
 }
 
-fun Fragment.toast(message: String) {
-    Snackbar.make(getView(), message, Snackbar.LENGTH_LONG)
-            .show();
-}
+fun Fragment.toast(message: String) = Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show()
 
-fun String.firstToUpperCase(): String {
-    return this.first().toUpperCase() + this.substring(1)
-}
+fun String.firstToUpperCase(): String = first().toUpperCase() + substring(1)

@@ -24,10 +24,10 @@ public class NetworkImageFragment : Fragment() {
         withComponent().inject(this)
 
         val root = inflater!!.inflate(R.layout.fragment_network_image, container, false)
-        val imageView = root.findViewById(R.id.mapNetworkImageView) as NetworkImageView
-        // imageView.setErrorImageResId(R.drawable.my_error_image);
-        // imageView.setDefaultImageResId(R.drawable.my_default_image);
-        imageView.setImageUrl(ApiUrls.getBerkeleyMapUrl(), imageLoader)
+        val map = root.findViewById(R.id.mapNetworkImageView) as NetworkImageView
+        // map.setErrorImageResId(R.drawable.my_error_image);
+        // map.setDefaultImageResId(R.drawable.my_default_image);
+        map.setImageUrl(ApiUrls.getBerkeleyMapUrl(), imageLoader)
 
         return root
     }
