@@ -57,7 +57,7 @@ public class GsonRequestFragment : Fragment() {
     private fun getAirQuality() {
         flipper.setDisplayedChild(0)
 
-        val URL = ApiUrls.getAirQualityUrl()
+        val URL = Api.getAirQualityUrl()
         val listener = Listener<AirQualityResponse> { r -> Bus.post(AirQualityEvent(r, null)) }
         val errListener = ErrorListener { e -> Bus.post(AirQualityEvent(null, e)) }
 

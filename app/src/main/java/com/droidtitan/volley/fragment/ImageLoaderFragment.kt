@@ -28,7 +28,7 @@ public class ImageLoaderFragment : Fragment() {
         val root = inflater!!.inflate(R.layout.fragment_image_loader, container, false) as ViewFlipper
         val map = root.findViewById(R.id.mapImageView) as ImageView
 
-        loader.get(ApiUrls.getSFmapUrl(), object : ImageListener {
+        loader.get(Api.getSFmapUrl(), object : ImageListener {
             override fun onResponse(container: ImageContainer, isImmediate: Boolean) {
                 val bitmap = container.getBitmap()
                 if (bitmap != null) {

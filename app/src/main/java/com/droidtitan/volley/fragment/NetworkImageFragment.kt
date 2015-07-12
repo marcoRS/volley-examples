@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.android.volley.toolbox.ImageLoader
 import com.android.volley.toolbox.NetworkImageView
 import com.droidtitan.volley.R
-import com.droidtitan.volley.util.ApiUrls
+import com.droidtitan.volley.util.Api
 import com.droidtitan.volley.util.setActionBarTitle
 import com.droidtitan.volley.util.withComponent
 import javax.inject.Inject
@@ -16,7 +16,7 @@ import kotlin.properties.Delegates
 
 public class NetworkImageFragment : Fragment() {
 
-    var imageLoader: ImageLoader by Delegates.notNull()
+    var loader: ImageLoader by Delegates.notNull()
         @Inject set
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, state: Bundle?): View? {
@@ -27,7 +27,7 @@ public class NetworkImageFragment : Fragment() {
         val map = root.findViewById(R.id.mapNetworkImageView) as NetworkImageView
         // map.setErrorImageResId(R.drawable.my_error_image);
         // map.setDefaultImageResId(R.drawable.my_default_image);
-        map.setImageUrl(ApiUrls.getBerkeleyMapUrl(), imageLoader)
+        map.setImageUrl(Api.getBerkeleyMapUrl(), loader)
 
         return root
     }

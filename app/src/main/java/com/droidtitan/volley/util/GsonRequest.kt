@@ -11,7 +11,6 @@ import java.util.HashMap
 
 /** Volley adapter for JSON requests that will be parsed into Java objects by Gson. */
 public class GsonRequest<T> : Request<T> {
-    private val gson = Gson()
     private val clazz: Class<T>
     private var httpHeaders: MutableMap<String, String>? = null
     private var listener: Listener<T>? = null
@@ -70,11 +69,15 @@ public class GsonRequest<T> : Request<T> {
     override fun parseNetworkResponse(response: NetworkResponse): Response<T> {
         try {
             val json = String(response.data, HttpHeaderParser.parseCharset(response.headers))
-            return Response.success(gson.fromJson(json, clazz), HttpHeaderParser.parseCacheHeaders(response))
+            return Response.success(GSON.fromJson(json, clazz), HttpHeaderParser.parseCacheHeaders(response))
         } catch (e: UnsupportedEncodingException) {
             return Response.error<T>(ParseError(e))
         } catch (e: JsonSyntaxException) {
             return Response.error<T>(ParseError(e))
         }
+    }
+
+    companion object {
+        public val GSON: Gson = Gson()
     }
 }
