@@ -14,7 +14,7 @@ import com.android.volley.VolleyError
 import com.droidtitan.volley.R
 import com.droidtitan.volley.model.air.AirQualityResponse
 import com.droidtitan.volley.util.*
-import com.droidtitan.volleyexamples.rest.util.GsonRequest
+import com.droidtitan.volley.util.GsonRequest
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
