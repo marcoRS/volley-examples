@@ -6,9 +6,9 @@
     <string name="generic_error">An error occurred. Try again or check settings.</string>
     <string name="no_data_connection">No data connection.</string>
     <string name="no_results_found">No no results found.</string>
-    <string name="json_request_example">Json Request with Gson</string>
-    <string name="image_loader_example">NetworkImage in XML</string>
-    <string name="networkimage_example">ImageLoader with ImageView</string>
+    <string name="json_request_example">Gson Request</string>
+    <string name="image_loader_example">Network ImageView</string>
+    <string name="networkimage_example">Image Loader</string>
     <string name="error_loading_image">Error loading image.</string>
     <string name="air_quality">Air Quality</string>
     <string name="try_again">Try again?</string>

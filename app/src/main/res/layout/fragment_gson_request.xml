@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/side_margin"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
@@ -48,9 +49,11 @@
 
     <Button
         android:id="@+id/retryButton"
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingLeft="@dimen/side_margin"
+        android:paddingRight="@dimen/side_margin"
         android:text="@string/try_again" />
 
 </ViewFlipper>

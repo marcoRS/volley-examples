@@ -16,7 +16,7 @@ public final class Bus {
         DEFAULT_BUS.unregister(target);
     }
 
-    public static void postEvent(Object event) {
+    public static void post(Object event) {
         DEFAULT_BUS.post(event);
     }
 

@@ -1,14 +1,12 @@
-package com.droidtitan.volleyexamples.rest.model.air;
+package com.droidtitan.volleyexamples.rest.model.air
 
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.SerializedName
 
 public class Weather {
 
-    /**
-     * In celcius
-     */
-    @SerializedName("temperatura")
-    String temperature;
+    /** In celcius */
+    SerializedName("temperatura")
+    public var temperature: String? = null
 
     /**
      * Condición del clima, puede ser: no_disponible, despejado_dia, despejado_noche, bruma_dia,
@@ -17,14 +15,6 @@ public class Weather {
      * lluvia_moderada_dia, lluvia_moderada_noche, lluvia_intensa_dia, lluvia_intensa_noche o
      * desconocido
      */
-    @SerializedName("condicion")
-    String condition;
-
-    public String getTemperature() {
-        return temperature;
-    }
-
-    public String getCondition() {
-        return condition;
-    }
+    SerializedName("condicion")
+    public var condition: String? = null
 }

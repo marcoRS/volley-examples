@@ -2,9 +2,7 @@
 
 <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    android:layout_height="match_parent">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -12,19 +10,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/mapImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/mapImageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/demo_map_image"
-            android:scaleType="fitStart" />
-
-    </LinearLayout>
+        android:layout_gravity="center"
+        android:contentDescription="@string/demo_map_image"
+        android:scaleType="fitCenter" />
 
     <TextView
         android:id="@+id/textView"
@@ -33,6 +25,5 @@
         android:layout_gravity="center"
         android:text="@string/error_loading_image"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
 
 </ViewFlipper>

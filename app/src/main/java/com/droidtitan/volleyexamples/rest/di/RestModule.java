@@ -48,6 +48,8 @@ public class RestModule {
     @Singleton
     public RequestQueue provideRequestQueue(OkUrlFactory okUrlFactory,
                                             @Named("App") Context context) {
+
+
         /** Set up to use OkHttp */
         return Volley.newRequestQueue(context, new OkHttpStack(okUrlFactory));
     }

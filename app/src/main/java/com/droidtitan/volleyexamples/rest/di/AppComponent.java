@@ -2,18 +2,18 @@ package com.droidtitan.volleyexamples.rest.di;
 
 import com.droidtitan.volleyexamples.rest.fragment.ImageLoaderFragment;
 import com.droidtitan.volleyexamples.rest.fragment.NetworkImageFragment;
-import com.droidtitan.volleyexamples.rest.fragment.RequestFragment;
+import com.droidtitan.volleyexamples.rest.fragment.GsonRequestFragment;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
 
 @Singleton
-@Component(modules = RestModule.class)
+@Component(modules = {RestModule.class})
 public interface AppComponent {
     void inject(ImageLoaderFragment fragment);
 
     void inject(NetworkImageFragment fragment);
 
-    void inject(RequestFragment fragment);
+    void inject(GsonRequestFragment fragment);
 }

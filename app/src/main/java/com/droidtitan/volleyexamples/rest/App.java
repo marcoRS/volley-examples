@@ -17,12 +17,7 @@ public class App extends Application {
         component = DaggerAppComponent.builder().restModule(new RestModule(this)).build();
     }
 
-
     public AppComponent appComponent() {
         return component;
-    }
-
-    public static App from(Context context) {
-        return (App) context.getApplicationContext();
     }
 }
