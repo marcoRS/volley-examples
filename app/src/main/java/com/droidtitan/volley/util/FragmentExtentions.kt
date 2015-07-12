@@ -11,9 +11,7 @@ fun Fragment.setActionBarTitle(@StringRes title: Int) {
     (getActivity() as? AppCompatActivity)?.getSupportActionBar()?.setTitle(title)
 }
 
-fun Fragment.withComponent(): AppComponent {
-    return (getActivity().getApplicationContext() as App).appComponent()
-}
+fun Fragment.withComponent(): AppComponent = (getActivity().getApplication() as App).component()
 
 fun Fragment.toast(message: String) = Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show()
 

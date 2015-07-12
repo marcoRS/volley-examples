@@ -62,9 +62,7 @@ public class GsonRequest<T> : Request<T> {
         return httpHeaders as Map<String, String>
     }
 
-    override fun deliverResponse(response: T) {
-        listener?.onResponse(response)
-    }
+    override fun deliverResponse(response: T) = listener?.onResponse(response)
 
     override fun parseNetworkResponse(response: NetworkResponse): Response<T> {
         try {

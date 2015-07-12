@@ -7,7 +7,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.nio.charset.Charset
 
-
 /**
  * @param res Android resources for fetching a string.
  * @return A user readable message describing the Http failure.
