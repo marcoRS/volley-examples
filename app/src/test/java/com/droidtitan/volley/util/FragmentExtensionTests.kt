@@ -7,7 +7,11 @@ import kotlin.test.assertEquals
 public class FragmentExtensiontests {
 
     @Test fun testFirstToUpperCase() {
-        val lowercase = "volley examples"
-        assertEquals("Volley examples", lowercase.firstToUpperCase())
+        val cases = arrayOf("volley examples", "m", " ", "Test")
+        val expected = arrayOf("Volley examples", "M", " ", "Test")
+
+        for (i in 0..cases.size() - 1) {
+            assertEquals(expected.get(i), cases.get(i).firstToUpperCase())
+        }
     }
 }
