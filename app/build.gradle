@@ -1,6 +1,5 @@
 apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.application'
-//apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'kotlin-android'
 apply from: '../config/quality.gradle'
 
@@ -17,7 +16,6 @@ android {
 
     lintOptions {
         abortOnError false
-        disable 'InvalidPackage'
     }
 
     buildTypes {
@@ -43,7 +41,7 @@ dependencies {
 
     compile 'com.mcxiaoke.volley:library:1.0.16'
     compile 'com.google.code.gson:gson:2.3.1'
-    compile 'de.greenrobot:eventbus:2.2.1'
+    compile 'de.greenrobot:eventbus:2.4.0'
     compile "com.squareup.okhttp:okhttp:$okhttp_version"
     compile "com.squareup.okhttp:okhttp-urlconnection:$okhttp_version"
 
