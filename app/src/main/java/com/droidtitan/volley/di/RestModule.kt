@@ -1,4 +1,4 @@
-package com.droidtitan.volleyexamples.rest.di
+package com.droidtitan.volley.di
 
 import android.content.Context
 import android.graphics.Bitmap

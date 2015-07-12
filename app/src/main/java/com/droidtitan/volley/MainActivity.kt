@@ -1,12 +1,12 @@
-package com.droidtitan.volleyexamples.rest
+package com.droidtitan.volley
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import com.droidtitan.volleyexamples.rest.fragment.ExamplesListFragment
-import com.droidtitan.volleyexamples.rest.fragment.ExamplesListFragment.AttachFragmentEvent
-import com.droidtitan.volleyexamples.rest.util.Bus
+import com.droidtitan.volley.fragment.ExamplesListFragment
+import com.droidtitan.volley.fragment.ExamplesListFragment.AttachFragmentEvent
+import com.droidtitan.volley.util.Bus
 
 public class MainActivity : AppCompatActivity() {
 

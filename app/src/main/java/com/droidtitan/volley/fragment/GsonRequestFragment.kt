@@ -1,4 +1,4 @@
-package com.droidtitan.volleyexamples.rest.fragment
+package com.droidtitan.volley.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,9 +11,10 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response.ErrorListener
 import com.android.volley.Response.Listener
 import com.android.volley.VolleyError
-import com.droidtitan.volleyexamples.rest.R
-import com.droidtitan.volleyexamples.rest.model.air.AirQualityResponse
-import com.droidtitan.volleyexamples.rest.util.*
+import com.droidtitan.volley.R
+import com.droidtitan.volley.model.air.AirQualityResponse
+import com.droidtitan.volley.util.*
+import com.droidtitan.volleyexamples.rest.util.GsonRequest
 import javax.inject.Inject
 import kotlin.properties.Delegates
 

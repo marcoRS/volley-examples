@@ -1,4 +1,4 @@
-package com.droidtitan.volleyexamples.rest.fragment
+package com.droidtitan.volley.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,8 +11,8 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.ImageLoader
 import com.android.volley.toolbox.ImageLoader.ImageContainer
 import com.android.volley.toolbox.ImageLoader.ImageListener
-import com.droidtitan.volleyexamples.rest.R
-import com.droidtitan.volleyexamples.rest.util.*
+import com.droidtitan.volley.R
+import com.droidtitan.volley.util.*
 import javax.inject.Inject
 import kotlin.properties.Delegates
 

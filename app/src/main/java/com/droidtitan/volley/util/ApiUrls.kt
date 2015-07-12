@@ -1,4 +1,4 @@
-package com.droidtitan.volleyexamples.rest.util
+package com.droidtitan.volley.util
 
 public object ApiUrls {
     val ROOT_URL = "http://maps.googleapis.com/maps/api/staticmap?center="

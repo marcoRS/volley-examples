@@ -1,11 +1,10 @@
-package com.droidtitan.volleyexamples.rest;
+package com.droidtitan.volley;
 
 import android.app.Application;
-import android.content.Context;
 
-import com.droidtitan.volleyexamples.rest.di.AppComponent;
-import com.droidtitan.volleyexamples.rest.di.DaggerAppComponent;
-import com.droidtitan.volleyexamples.rest.di.RestModule;
+import com.droidtitan.volley.di.AppComponent;
+import com.droidtitan.volley.di.RestModule;
+import com.droidtitan.volley.di.DaggerAppComponent;
 
 public class App extends Application {
 

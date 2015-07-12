@@ -1,11 +1,11 @@
-package com.droidtitan.volleyexamples.rest.util
+package com.droidtitan.volley.util
 
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import com.droidtitan.volleyexamples.rest.App
-import com.droidtitan.volleyexamples.rest.di.AppComponent
+import com.droidtitan.volley.App
+import com.droidtitan.volley.di.AppComponent
 
 fun Fragment.setActionBarTitle(@StringRes title: Int) {
     (getActivity() as? AppCompatActivity)?.getSupportActionBar()?.setTitle(title)

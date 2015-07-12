@@ -1,4 +1,4 @@
-package com.droidtitan.volleyexamples.rest.fragment
+package com.droidtitan.volley.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import com.droidtitan.volleyexamples.rest.R
-import com.droidtitan.volleyexamples.rest.util.Bus
-import com.droidtitan.volleyexamples.rest.util.setActionBarTitle
+import com.droidtitan.volley.R
+import com.droidtitan.volley.util.Bus
+import com.droidtitan.volley.util.setActionBarTitle
 
 public class ExamplesListFragment : Fragment() {
 

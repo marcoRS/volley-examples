@@ -1,4 +1,4 @@
-package com.droidtitan.volleyexamples.rest.model.air
+package com.droidtitan.volley.model.air
 
 public class Uv {
 

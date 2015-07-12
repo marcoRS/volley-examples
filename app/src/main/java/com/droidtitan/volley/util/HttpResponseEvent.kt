@@ -1,4 +1,4 @@
-package com.droidtitan.volleyexamples.rest.util
+package com.droidtitan.volley.util
 
 import com.android.volley.VolleyError
 

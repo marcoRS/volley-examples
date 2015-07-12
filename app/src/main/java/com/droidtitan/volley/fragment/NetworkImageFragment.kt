@@ -1,4 +1,4 @@
-package com.droidtitan.volleyexamples.rest.fragment
+package com.droidtitan.volley.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.android.volley.toolbox.ImageLoader
 import com.android.volley.toolbox.NetworkImageView
-import com.droidtitan.volleyexamples.rest.R
-import com.droidtitan.volleyexamples.rest.util.ApiUrls
-import com.droidtitan.volleyexamples.rest.util.setActionBarTitle
-import com.droidtitan.volleyexamples.rest.util.withComponent
+import com.droidtitan.volley.R
+import com.droidtitan.volley.util.ApiUrls
+import com.droidtitan.volley.util.setActionBarTitle
+import com.droidtitan.volley.util.withComponent
 import javax.inject.Inject
 import kotlin.properties.Delegates
 

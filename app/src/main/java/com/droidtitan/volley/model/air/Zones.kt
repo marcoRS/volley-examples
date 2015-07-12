@@ -1,4 +1,6 @@
-package com.droidtitan.volleyexamples.rest.model.air
+package com.droidtitan.volley.model.air
+
+import com.droidtitan.volley.model.air.Zone
 
 public class Zones {
 

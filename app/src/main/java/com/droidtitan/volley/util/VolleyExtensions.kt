@@ -1,8 +1,8 @@
-package com.droidtitan.volleyexamples.rest.util
+package com.droidtitan.volley.util
 
 import android.content.res.Resources
 import com.android.volley.*
-import com.droidtitan.volleyexamples.rest.R
+import com.droidtitan.volley.R
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.apache.http.HttpStatus
