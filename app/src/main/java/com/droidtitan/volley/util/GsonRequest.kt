@@ -8,23 +8,22 @@ import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import java.io.UnsupportedEncodingException
 import java.util.HashMap
+import kotlin.properties.Delegates
 
 /** Volley adapter for JSON requests that will be parsed into Java objects by Gson. */
 public class GsonRequest<T> : Request<T> {
     private val clazz: Class<T>
-    private var httpHeaders: MutableMap<String, String>? = null
+    private val headerz: MutableMap<String, String> by Delegates.lazy { HashMap<String, String>() }
     private var listener: Listener<T>? = null
 
     /**
      * Make a GET request and return a parsed object from JSON.
      * @param url     URL of the request to make
      * @param clazz   Relevant class object, for Gson's reflection
-     * @param headers Map of request headers
      */
-    public constructor(url: String, clazz: Class<T>, headers: MutableMap<String, String>?, listener: Listener<T>, errorListener: ErrorListener) :
+    public constructor(url: String, clazz: Class<T>, listener: Listener<T>, errorListener: ErrorListener) :
     super(Request.Method.GET, url, errorListener) {
         this.clazz = clazz
-        this.httpHeaders = headers
         this.listener = listener
     }
 
@@ -33,33 +32,19 @@ public class GsonRequest<T> : Request<T> {
      * @param method        The Http Method type as specified by Request.Method
      * @param url           URL of the request to make
      * @param clazz         Relevant class object, for Gson's reflection
-     * @param headers       The http headers
      * @param listener      Callback interface for delivering parsed responses
      * @param errorListener Callback interface for delivering error responses
      */
-    public constructor(method: Int, url: String, clazz: Class<T>, headers: MutableMap<String, String>?,
-                       listener: Listener<T>, errorListener: ErrorListener) :
+    public constructor(method: Int, url: String, clazz: Class<T>, listener: Listener<T>, errorListener: ErrorListener) :
     super(method, url, errorListener) {
-        this.clazz = clazz
-        this.httpHeaders = headers
-        this.listener = listener
-    }
-
-    public constructor(method: Int, url: String, clazz: Class<T>, listener: Listener<T>, e: ErrorListener) :
-    super(method, url, e) {
         this.clazz = clazz
         this.listener = listener
     }
 
     @throws(AuthFailureError::class)
     override fun getHeaders(): Map<String, String> {
-        if (httpHeaders == null) {
-            httpHeaders = HashMap<String, String>()
-        }
-
-        /** Add required headers.  */
-        httpHeaders!!.put("Accept", "application/json")
-        return httpHeaders as Map<String, String>
+        headerz.put("Accept", "application/json")
+        return headerz
     }
 
     override fun deliverResponse(response: T) = listener?.onResponse(response)
@@ -76,6 +61,6 @@ public class GsonRequest<T> : Request<T> {
     }
 
     companion object {
-        public val GSON: Gson = Gson()
+        public val GSON: Gson by Delegates.lazy { Gson() }
     }
 }

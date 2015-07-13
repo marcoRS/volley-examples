@@ -55,7 +55,7 @@ public class GsonRequestFragment : Fragment() {
         val listener = Listener<AirQualityResponse> { r -> Bus.post(AirQualityEvent(r, null)) }
         val errListener = ErrorListener { e -> Bus.post(AirQualityEvent(null, e)) }
 
-        val request = GsonRequest(URL, javaClass<AirQualityResponse>(), null, listener, errListener)
+        val request = GsonRequest(URL, javaClass<AirQualityResponse>(), listener, errListener)
         request.setTag(AIR_QUALITY).setShouldCache(false)
         queue.add(request)
     }
