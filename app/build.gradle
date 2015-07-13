@@ -1,7 +1,6 @@
 apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply from: '../config/quality.gradle'
 
 android {
     compileSdkVersion 22
@@ -51,4 +50,5 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:2.0.26-beta'
+    testCompile 'org.robolectric:robolectric:3.0'
 }
