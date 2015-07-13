@@ -15,4 +15,4 @@ fun Fragment.withComponent(): AppComponent = (getActivity().getApplication() as 
 
 fun Fragment.toast(message: String) = Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show()
 
-fun String.firstToUpperCase(): String = first().toUpperCase() + substring(1)
+fun String.firstToUpperCase() = if (isEmpty()) this else first().toUpperCase() + substring(1)
