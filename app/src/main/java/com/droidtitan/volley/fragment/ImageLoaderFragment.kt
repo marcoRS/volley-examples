@@ -32,14 +32,14 @@ public class ImageLoaderFragment : Fragment() {
             override fun onResponse(container: ImageContainer, isImmediate: Boolean) {
                 val bitmap = container.getBitmap()
                 if (bitmap != null) {
-                    root.setDisplayedChild(1) // Set Layout with ImageView
+                    root.setDisplayedChild(1)
                     map.setImageBitmap(bitmap)
                 }
             }
 
             override fun onErrorResponse(error: VolleyError) {
-                root.setDisplayedChild(2) // Set error view.
-                toast(error.toString(getResources()))
+                root.setDisplayedChild(2)
+                showSnackbar(error.toString(getResources()))
             }
         })
 

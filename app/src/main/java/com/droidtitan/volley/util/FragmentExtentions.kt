@@ -13,6 +13,6 @@ fun Fragment.setActionBarTitle(@StringRes title: Int) {
 
 fun Fragment.withComponent(): AppComponent = (getActivity().getApplication() as App).component()
 
-fun Fragment.toast(message: String) = Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show()
+fun Fragment.showSnackbar(message: String) = Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show()
 
 fun String.firstToUpperCase() = if (isEmpty()) this else first().toUpperCase() + substring(1)

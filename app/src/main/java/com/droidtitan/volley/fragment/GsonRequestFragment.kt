@@ -18,9 +18,9 @@ import javax.inject.Inject
 import kotlin.properties.Delegates
 
 public class GsonRequestFragment : Fragment() {
-    var flipper: ViewFlipper by Delegates.notNull()
-    var airQuality: TextView by Delegates.notNull()
-    var temperature: TextView by Delegates.notNull()
+    val flipper: ViewFlipper by bindView(R.id.gsonFlipper)
+    val airQuality: TextView by bindView(R.id.qualityTextView)
+    val temperature: TextView by bindView(R.id.temperatureTextView)
 
     var response: AirQualityResponse? = null
     var queue: RequestQueue by Delegates.notNull()
@@ -36,21 +36,16 @@ public class GsonRequestFragment : Fragment() {
         Bus.unregister(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, state: Bundle?): View? {
         setActionBarTitle(R.string.json_request_example)
         withComponent().inject(this)
+        return inflater!!.inflate(R.layout.fragment_gson_request, container, false)
+    }
 
-        flipper = inflater!!.inflate(R.layout.fragment_gson_request, container, false) as ViewFlipper
-
-        airQuality = flipper.findViewById(R.id.qualityTextView) as TextView
-        temperature = flipper.findViewById(R.id.temperatureTextView) as TextView
+    override fun onViewCreated(view: View?, state: Bundle?) {
+        super.onViewCreated(view, state)
         flipper.findViewById(R.id.retryButton).setOnClickListener { getAirQuality() }
-
-        if (response == null) {
-            getAirQuality()
-        }
-
-        return flipper
+        if (response == null) getAirQuality()
     }
 
     private fun getAirQuality() {
@@ -66,18 +61,18 @@ public class GsonRequestFragment : Fragment() {
     }
 
     public fun onEventMainThread(event: AirQualityEvent) {
-        val error = event.volleyError
+        val error = event.error
         response = event.response
 
         if (error == null) {
             flipper.setDisplayedChild(1)
-            temperature.setText(response!!.getTemperature() + " \u2103")
+            temperature.setText(response!!.getTemperature() + CELCIUS)
 
             val category = response!!.getAirQualityCategory()
             airQuality.setText(category!!.firstToUpperCase())
         } else {
             flipper.setDisplayedChild(2)
-            toast(error.toString(getResources()))
+            showSnackbar(error.toString(getResources()))
         }
     }
 
@@ -86,11 +81,11 @@ public class GsonRequestFragment : Fragment() {
         queue.cancelAll(AIR_QUALITY)
     }
 
-    public class AirQualityEvent(response: AirQualityResponse?, volleyError: VolleyError?)
-    : HttpResponseEvent<AirQualityResponse>(response, volleyError)
+    class AirQualityEvent(var response: AirQualityResponse?, var error: VolleyError?)
 
     companion object {
         public val TAG: String = javaClass<GsonRequestFragment>().getName()
-        public val AIR_QUALITY: String = "AirQualityTag"
+        val AIR_QUALITY: String = "AirQualityTag"
+        val CELCIUS: String = " \u2103"
     }
 }
