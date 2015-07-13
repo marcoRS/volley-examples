@@ -9,9 +9,9 @@ import javax.inject.Singleton
 Singleton
 Component(modules = arrayOf(RestModule::class))
 public interface AppComponent {
-    public fun inject(f: ImageLoaderFragment)
+    fun inject(f: ImageLoaderFragment)
 
-    public fun inject(f: NetworkImageFragment)
+    fun inject(f: NetworkImageFragment)
 
-    public fun inject(f: GsonRequestFragment)
+    fun inject(f: GsonRequestFragment)
 }

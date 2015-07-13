@@ -14,7 +14,6 @@ import com.android.volley.VolleyError
 import com.droidtitan.volley.R
 import com.droidtitan.volley.model.air.AirQualityResponse
 import com.droidtitan.volley.util.*
-import com.droidtitan.volley.util.GsonRequest
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
@@ -66,11 +65,6 @@ public class GsonRequestFragment : Fragment() {
         queue.add(request)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        queue.cancelAll(AIR_QUALITY)
-    }
-
     public fun onEventMainThread(event: AirQualityEvent) {
         val error = event.volleyError
         response = event.response
@@ -85,6 +79,11 @@ public class GsonRequestFragment : Fragment() {
             flipper.setDisplayedChild(2)
             toast(error.toString(getResources()))
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        queue.cancelAll(AIR_QUALITY)
     }
 
     public class AirQualityEvent(response: AirQualityResponse?, volleyError: VolleyError?)

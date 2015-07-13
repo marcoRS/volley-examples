@@ -21,7 +21,7 @@ import javax.inject.Singleton
 Module
 public class RestModule(val context: Context) {
 
-    Provides Singleton Named("App")
+    Singleton Provides Named("App")
     public fun provideAppContext(): Context = context
 
     Singleton Provides
@@ -30,12 +30,12 @@ public class RestModule(val context: Context) {
     Singleton Provides
     public fun provideOkUrlFactory(okHttpClient: OkHttpClient): OkUrlFactory = OkUrlFactory(okHttpClient)
 
-    Provides Singleton
+    Singleton Provides
     public fun provideQueue(okUrlFactory: OkUrlFactory, Named("App") context: Context): RequestQueue {
         return Volley.newRequestQueue(context, OkHttpStack(okUrlFactory))
     }
 
-    Provides Singleton
+    Singleton Provides
     public fun provideImageLoader(queue: RequestQueue): ImageLoader {
         val imageSize = 1024L
         val count = 8L
@@ -43,9 +43,9 @@ public class RestModule(val context: Context) {
         return ImageLoader(queue, LruBitmapCache(maxSize))
     }
 
-    class OkHttpStack(val okUrlFactory: OkUrlFactory) : HurlStack() {
+    class OkHttpStack(val factory: OkUrlFactory) : HurlStack() {
         @throws(IOException::class) override fun createConnection(url: URL): HttpURLConnection {
-            return okUrlFactory.open(url)
+            return factory.open(url)
         }
     }
 
