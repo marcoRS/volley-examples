@@ -13,6 +13,7 @@ import kotlin.properties.Delegates
 /** Volley adapter for JSON requests that will be parsed into Java objects by Gson. */
 public class GsonRequest<T> : Request<T> {
     private val clazz: Class<T>
+    /** headerz is lazily initialized when using Delegates.lazy. */
     private val headerz: MutableMap<String, String> by Delegates.lazy { HashMap<String, String>() }
     private var listener: Listener<T>? = null
 

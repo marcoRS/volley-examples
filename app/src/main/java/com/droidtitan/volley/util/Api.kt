@@ -7,9 +7,9 @@ public object Api {
     val SF_MAP_URL = "San+Francisco,CA&zoom=12&size=1000x400&sensor=false"
 
     /** Updated every hour. */
-    public fun getAirQualityUrl(): String = "http://datos.labplc.mx/aire.json"
+    public fun airQualityUrl(): String = "http://datos.labplc.mx/aire.json"
 
-    public fun getBerkeleyMapUrl(): String = ROOT_URL + BERKELEY_QUERY
+    public fun berkeleyMapUrl(): String = ROOT_URL + BERKELEY_QUERY
 
-    public fun getSFmapUrl(): String = ROOT_URL + SF_MAP_URL
+    public fun sfMapUrl(): String = ROOT_URL + SF_MAP_URL
 }

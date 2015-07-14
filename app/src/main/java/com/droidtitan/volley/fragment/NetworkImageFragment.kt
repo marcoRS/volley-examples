@@ -27,7 +27,7 @@ public class NetworkImageFragment : Fragment() {
         val map = root.findViewById(R.id.mapNetworkImageView) as NetworkImageView
         // map.setErrorImageResId(R.drawable.my_error_image);
         // map.setDefaultImageResId(R.drawable.my_default_image);
-        map.setImageUrl(Api.getBerkeleyMapUrl(), loader)
+        map.setImageUrl(Api.berkeleyMapUrl(), loader)
 
         return root
     }

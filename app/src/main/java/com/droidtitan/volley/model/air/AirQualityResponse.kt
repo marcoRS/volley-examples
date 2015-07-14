@@ -7,7 +7,7 @@ public class AirQualityResponse {
     SerializedName("consulta")
     var airQualityHolder: AirQualityHolder? = null
 
-    public fun getAirQualityCategory(): String? {
+    public fun category(): String? {
         return airQualityHolder?.airQuality?.category
     }
 

@@ -2,6 +2,7 @@ package com.droidtitan.volley.util
 
 import de.greenrobot.event.EventBus
 
+/** A singleton object of Bus, this is created using. "object" instead of class. */
 public object Bus {
 
     private val DEFAULT_BUS = EventBus.getDefault()

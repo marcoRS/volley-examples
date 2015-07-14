@@ -1,5 +1,6 @@
 package com.droidtitan.volley.di
 
+import android.app.Application
 import android.content.Context
 import android.graphics.Bitmap
 import android.support.v4.util.LruCache
@@ -15,45 +16,39 @@ import dagger.Provides
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
-import javax.inject.Named
 import javax.inject.Singleton
 
-Module
-public class RestModule(val context: Context) {
+@Module
+public class RestModule(val application: Application) {
 
-    Singleton Provides Named("App")
-    public fun provideAppContext(): Context = context
+    @Singleton @Provides
+    public fun provideQueue(): RequestQueue {
 
-    Singleton Provides
-    public fun provideOkHttpClient(): OkHttpClient = OkHttpClient()
+        val factory = OkUrlFactory(OkHttpClient())
+        val hurlStack = object : HurlStack() {
+            @throws(IOException::class) override fun createConnection(url: URL): HttpURLConnection {
+                return factory.open(url)
+            }
+        }
 
-    Singleton Provides
-    public fun provideOkUrlFactory(okHttpClient: OkHttpClient): OkUrlFactory = OkUrlFactory(okHttpClient)
-
-    Singleton Provides
-    public fun provideQueue(okUrlFactory: OkUrlFactory, Named("App") context: Context): RequestQueue {
-        return Volley.newRequestQueue(context, OkHttpStack(okUrlFactory))
+        return Volley.newRequestQueue(application, hurlStack)
     }
 
-    Singleton Provides
+    @Singleton @Provides
     public fun provideImageLoader(queue: RequestQueue): ImageLoader {
+
         val imageSize = 1024L
         val count = 8L
         val maxSize = (Runtime.getRuntime().maxMemory() / imageSize / count).toInt()
-        return ImageLoader(queue, LruBitmapCache(maxSize))
-    }
 
-    class OkHttpStack(val factory: OkUrlFactory) : HurlStack() {
-        @throws(IOException::class) override fun createConnection(url: URL): HttpURLConnection {
-            return factory.open(url)
+        val lruCache = object : LruCache<String, Bitmap>(maxSize), ImageCache {
+            override fun sizeOf(key: String?, value: Bitmap?) = value!!.getRowBytes() * value.getHeight()
+            override fun getBitmap(url: String): Bitmap? = get(url)
+            override fun putBitmap(url: String, bitmap: Bitmap) {
+                put(url, bitmap)
+            }
         }
-    }
 
-    class LruBitmapCache(maxSize: Int) : LruCache<String, Bitmap>(maxSize), ImageCache {
-        override fun sizeOf(key: String?, value: Bitmap?) = value!!.getRowBytes() * value.getHeight()
-        override fun getBitmap(url: String): Bitmap? = get(url)
-        override fun putBitmap(url: String, bitmap: Bitmap) {
-            put(url, bitmap)
-        }
+        return ImageLoader(queue, lruCache)
     }
 }
