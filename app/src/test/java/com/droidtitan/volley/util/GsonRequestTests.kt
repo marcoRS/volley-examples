@@ -30,7 +30,7 @@ public class GsonRequestTests {
 
         val listener = mock(javaClass<Listener<AirQualityResponse>>())
         errorListener = mock(javaClass<ErrorListener>())
-        request = GsonRequest(url, clazz, null, listener, errorListener)
+        request = GsonRequest(url, clazz, listener, errorListener)
     }
 
     @Test fun testErrorListenerResponseCalled() {
