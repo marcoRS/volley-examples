@@ -59,7 +59,7 @@ public class GsonRequestFragment : Fragment() {
         val url = Api.airQualityUrl()
         /** Any interface with one method can use this { } convention. (SAM conversion )*/
         val listener = Listener<AirQualityResponse> { r -> Bus.post(AirQualityEvent(r)) }
-        val errorListener = ErrorListener { e -> Bus.post(AirQualityEvent(null, e)) }
+        val errorListener = ErrorListener { e -> Bus.post(AirQualityEvent(error = e)) }
 
         val request = GsonRequest(url, javaClass<AirQualityResponse>(), listener, errorListener)
         request.setTag(AIR_QUALITY).setShouldCache(false)
