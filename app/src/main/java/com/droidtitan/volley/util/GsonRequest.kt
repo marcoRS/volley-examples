@@ -5,17 +5,14 @@ import com.android.volley.Response.ErrorListener
 import com.android.volley.Response.Listener
 import com.android.volley.toolbox.HttpHeaderParser
 import com.google.gson.Gson
-import com.google.gson.JsonSyntaxException
-import java.io.UnsupportedEncodingException
-import java.util.HashMap
 import kotlin.properties.Delegates
 
 /** Volley adapter for JSON requests that will be parsed into Java objects by Gson. */
 public class GsonRequest<T> : Request<T> {
     private val clazz: Class<T>
     /** headerz is lazily initialized when using Delegates.lazy. */
-    private val headerz: MutableMap<String, String> by Delegates.lazy { HashMap<String, String>() }
-    private var listener: Listener<T>? = null
+    private val headerz: MutableMap<String, String> by Delegates.lazy { hashMapOf("Accept" to "application/json") }
+    private val listener: Listener<T>
 
     /**
      * Make a GET request and return a parsed object from JSON.
@@ -43,20 +40,15 @@ public class GsonRequest<T> : Request<T> {
     }
 
     @throws(AuthFailureError::class)
-    override fun getHeaders(): Map<String, String> {
-        headerz.put("Accept", "application/json")
-        return headerz
-    }
+    override fun getHeaders(): Map<String, String> = headerz
 
-    override fun deliverResponse(response: T) = listener?.onResponse(response)
+    override fun deliverResponse(response: T) = listener.onResponse(response)
 
     override fun parseNetworkResponse(response: NetworkResponse): Response<T> {
         try {
             val json = String(response.data, HttpHeaderParser.parseCharset(response.headers))
             return Response.success(GSON.fromJson(json, clazz), HttpHeaderParser.parseCacheHeaders(response))
-        } catch (e: UnsupportedEncodingException) {
-            return Response.error<T>(ParseError(e))
-        } catch (e: JsonSyntaxException) {
+        } catch (e: Exception) {
             return Response.error<T>(ParseError(e))
         }
     }
