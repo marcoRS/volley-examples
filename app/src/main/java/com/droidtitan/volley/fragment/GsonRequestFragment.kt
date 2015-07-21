@@ -56,12 +56,12 @@ public class GsonRequestFragment : Fragment() {
     private fun getAirQuality() {
         flipper.setDisplayedChild(0)
 
-        val url = Api.airQualityUrl()
         /** Any interface with one method can use this { } convention. (SAM conversion )*/
         val listener = Listener<AirQualityResponse> { r -> Bus.post(AirQualityEvent(r)) }
         val errListener = ErrorListener { e -> Bus.post(AirQualityEvent(error = e)) }
+        val klass = javaClass<AirQualityResponse>()
 
-        queue.add(GsonRequest(url, javaClass<AirQualityResponse>(), listener, errListener) apply {
+        queue.add(GsonRequest(Api.airQualityUrl(), klass, listener, errListener) apply {
             setTag(AIR_QUALITY)
             setShouldCache(false)
         })
