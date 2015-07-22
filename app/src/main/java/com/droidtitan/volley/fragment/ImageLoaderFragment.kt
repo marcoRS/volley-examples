@@ -30,10 +30,9 @@ public class ImageLoaderFragment : Fragment() {
 
         loader.get(Api.sfMapUrl(), object : ImageListener {
             override fun onResponse(container: ImageContainer, isImmediate: Boolean) {
-                val bitmap = container.getBitmap()
-                if (bitmap != null) {
+                container.getBitmap()?.let {
                     root.setDisplayedChild(1)
-                    map.setImageBitmap(bitmap)
+                    map.setImageBitmap(it)
                 }
             }
 
