@@ -1,8 +1,9 @@
-package com.droidtitan.volley.util
+package com.droidtitan.volley.util.volley
 
 import android.content.res.Resources
 import com.android.volley.*
 import com.droidtitan.volley.R
+import com.droidtitan.volley.util.Api
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.nio.charset.Charset
@@ -46,3 +47,21 @@ private fun VolleyError.getApiErrorMessage(res: Resources): String {
     }
     return res.getString(R.string.generic_error)
 }
+
+
+@inline fun <reified T> RequestQueue.add(listener: Listener<T>?,
+                                         url: String,
+                                         @noinline configure: ((Request<*>) -> Any)? = null,
+                                         method: Int = Request.Method.GET) {
+
+    val volleyListener = Response.Listener<T> { r -> listener?.onCompleted(null, r) }
+    val errorListener = Response.ErrorListener { e -> listener?.onCompleted(e, null) }
+    val request = GsonRequest(method, url, javaClass<T>(), volleyListener, errorListener)
+    configure?.invoke(request)
+    this.
+    add(request)
+}
+
+fun Request<*>.dontCache(): Request<*> = setShouldCache(false)
+
+fun Request<*>.withTag(tag: Any): Request<*> = setTag(tag)

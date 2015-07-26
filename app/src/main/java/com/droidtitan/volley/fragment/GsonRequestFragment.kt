@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.ViewFlipper
 import com.android.volley.RequestQueue
-import com.android.volley.Response.ErrorListener
-import com.android.volley.Response.Listener
 import com.android.volley.VolleyError
 import com.droidtitan.volley.R
 import com.droidtitan.volley.model.air.AirQualityResponse
 import com.droidtitan.volley.util.*
+import com.droidtitan.volley.util.volley.*
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
@@ -56,15 +55,12 @@ public class GsonRequestFragment : Fragment() {
     private fun getAirQuality() {
         flipper.setDisplayedChild(0)
 
-        /** Any interface with one method can use this { } convention. (SAM conversion )*/
-        val listener = Listener<AirQualityResponse> { r -> Bus.post(AirQualityEvent(r)) }
-        val errListener = ErrorListener { e -> Bus.post(AirQualityEvent(error = e)) }
-        val klass = javaClass<AirQualityResponse>()
+        val listener = Listener<AirQualityResponse> { e, r ->
+            e?.let { Bus.post(AirQualityEvent(error = e)) }
+            r?.let { Bus.post(AirQualityEvent(response = r)) }
+        }
 
-        queue.add(GsonRequest(Api.airQualityUrl(), klass, listener, errListener) apply {
-            setTag(AIR_QUALITY)
-            setShouldCache(false)
-        })
+        queue.add(listener, Api.airQualityUrl(), { it.dontCache().withTag(AIR_QUALITY) })
     }
 
     public fun onEventMainThread(event: AirQualityEvent) {

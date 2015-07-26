@@ -6,6 +6,7 @@ import com.android.volley.Response.Listener
 import com.droidtitan.volley.App
 import com.droidtitan.volley.BuildConfig
 import com.droidtitan.volley.model.air.AirQualityResponse
+import com.droidtitan.volley.util.volley.GsonRequest
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

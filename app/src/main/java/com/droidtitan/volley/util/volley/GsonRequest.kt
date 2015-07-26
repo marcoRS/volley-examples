@@ -1,4 +1,4 @@
-package com.droidtitan.volley.util
+package com.droidtitan.volley.util.volley
 
 import com.android.volley.*
 import com.android.volley.Response.ErrorListener
