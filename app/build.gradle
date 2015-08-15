@@ -29,7 +29,7 @@ repositories {
     jcenter()
 }
 
-def support_version = "22.2.0"
+def support_version = "22.2.1"
 def okhttp_version = "2.4.0"
 def dagger_version = "2.0.1"
 
