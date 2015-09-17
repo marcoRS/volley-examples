@@ -22,9 +22,7 @@ public class GsonRequestFragment : Fragment() {
     val temperature: TextView by bindView(R.id.temperatureTextView)
 
     var response: AirQualityResponse? = null
-    /** Dagger injection is done through method injection. The delegate allows to defer assignment*/
-    var queue: RequestQueue by Delegates.notNull()
-        @Inject set
+    @Inject lateinit val queue: RequestQueue
 
     override fun onResume() {
         super.onResume()
@@ -53,7 +51,7 @@ public class GsonRequestFragment : Fragment() {
     }
 
     private fun getAirQuality() {
-        flipper.setDisplayedChild(0)
+        flipper.displayedChild = 0
 
         val listener = Listener<AirQualityResponse> { e, r ->
             e?.let { Bus.post(AirQualityEvent(error = e)) }
@@ -69,18 +67,18 @@ public class GsonRequestFragment : Fragment() {
 
         if (error != null) {
             /** Smart cast only works if val is used. */
-            showSnackbar(error.toString(getResources()))
+            showSnackbar(error.toString(resources))
         } else {
-            temperature.setText(response!!.getTemperature() + CELCIUS)
+            temperature.text = response!!.getTemperature() + CELCIUS
             /**
              * safe call operator ? calls the method category() if not null else null is returned.
              * if null is returned the 2nd ?: ensures "" is returned
              * */
-            airQuality.setText(response!!.category()?.firstToUpperCase() ?: "")
+            airQuality.text = response!!.category()?.firstToUpperCase() ?: ""
         }
 
         /** There is no ternary operator equivalent to Java, if else can be inlined however.*/
-        flipper.setDisplayedChild(if (error != null) 2 else 1)
+        flipper.displayedChild = if (error != null) 2 else 1
     }
 
     override fun onDestroy() {
@@ -93,7 +91,7 @@ public class GsonRequestFragment : Fragment() {
 
     /** Companion objects are used to create static properties. */
     companion object {
-        public val TAG: String = javaClass<GsonRequestFragment>().getName()
+        public val TAG: String = GsonRequestFragment::class.java.name
         val AIR_QUALITY: String = "AirQualityTag"
         val CELCIUS: String = " \u2103"
     }

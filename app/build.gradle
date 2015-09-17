@@ -3,12 +3,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "23.0.0 rc3"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionName "1.0.0"
         versionCode 1
     }
@@ -29,7 +29,7 @@ repositories {
     jcenter()
 }
 
-def support_version = "22.2.0"
+def support_version = "23.0.1"
 def okhttp_version = "2.4.0"
 def dagger_version = "2.0.1"
 

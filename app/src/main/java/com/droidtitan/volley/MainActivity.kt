@@ -14,8 +14,8 @@ public class MainActivity : AppCompatActivity() {
         super.onCreate(state)
         setContentView(R.layout.activity_main)
 
-        val fm = getSupportFragmentManager()
-        fm.addOnBackStackChangedListener { showHomeButton(fm.getBackStackEntryCount() > 0) }
+        val fm = supportFragmentManager
+        fm.addOnBackStackChangedListener { showHomeButton(fm.backStackEntryCount > 0) }
 
         if (state == null) {
             fm.beginTransaction().add(R.id.container, ExamplesListFragment()).commit()
@@ -23,9 +23,10 @@ public class MainActivity : AppCompatActivity() {
     }
 
     fun showHomeButton(enable: Boolean) {
-        val ab = getSupportActionBar()
-        ab.setHomeButtonEnabled(enable)
-        ab.setDisplayHomeAsUpEnabled(enable)
+        supportActionBar.apply {
+            setHomeButtonEnabled(enable)
+            setDisplayHomeAsUpEnabled(enable)
+        }
     }
 
     override fun onResume() {
@@ -39,7 +40,7 @@ public class MainActivity : AppCompatActivity() {
     }
 
     public fun onEventMainThread(event: AttachFragmentEvent) {
-        val fm = getSupportFragmentManager()
+        val fm = supportFragmentManager
         val tag = event.fragmentTag
 
         if (fm.findFragmentByTag(tag) == null) {
@@ -49,9 +50,8 @@ public class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        val id = item!!.getItemId()
-        if (id == android.R.id.home) {
-            getSupportFragmentManager().popBackStack()
+        if (item!!.itemId == android.R.id.home) {
+            supportFragmentManager.popBackStack()
             return true
         }
 

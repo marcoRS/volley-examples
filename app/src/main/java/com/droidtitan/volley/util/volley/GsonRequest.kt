@@ -5,13 +5,12 @@ import com.android.volley.Response.ErrorListener
 import com.android.volley.Response.Listener
 import com.android.volley.toolbox.HttpHeaderParser
 import com.google.gson.Gson
-import kotlin.properties.Delegates
 
 /** Volley adapter for JSON requests that will be parsed into Java objects by Gson. */
 public class GsonRequest<T> : Request<T> {
     private val clazz: Class<T>
     /** headerz is lazily initialized when using Delegates.lazy. */
-    private val headerz: MutableMap<String, String> by Delegates.lazy { hashMapOf("Accept" to "application/json") }
+    private val headerz: MutableMap<String, String> by lazy(LazyThreadSafetyMode.SYNCHRONIZED) { hashMapOf("Accept" to "application/json") }
     private val listener: Listener<T>
 
     /**
@@ -39,7 +38,7 @@ public class GsonRequest<T> : Request<T> {
         this.listener = listener
     }
 
-    @throws(AuthFailureError::class)
+    @Throws(AuthFailureError::class)
     override fun getHeaders(): Map<String, String> = headerz
 
     override fun deliverResponse(response: T) = listener.onResponse(response)
@@ -54,6 +53,6 @@ public class GsonRequest<T> : Request<T> {
     }
 
     companion object {
-        public val GSON: Gson by Delegates.lazy { Gson() }
+        public val GSON: Gson by lazy(LazyThreadSafetyMode.SYNCHRONIZED) { Gson() }
     }
 }

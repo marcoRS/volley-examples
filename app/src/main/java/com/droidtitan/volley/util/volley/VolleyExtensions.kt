@@ -49,14 +49,14 @@ private fun VolleyError.getApiErrorMessage(res: Resources): String {
 }
 
 
-@inline fun <reified T> RequestQueue.add(listener: Listener<T>?,
+inline fun <reified T : Any> RequestQueue.add(listener: Listener<T>?,
                                          url: String,
-                                         @noinline configure: ((Request<*>) -> Any)? = null,
+                                         noinline configure: ((Request<*>) -> Any)? = null,
                                          method: Int = Request.Method.GET) {
 
     val volleyListener = Response.Listener<T> { r -> listener?.onCompleted(null, r) }
     val errorListener = Response.ErrorListener { e -> listener?.onCompleted(e, null) }
-    val request = GsonRequest(method, url, javaClass<T>(), volleyListener, errorListener)
+    val request = GsonRequest(method, url, T::class.java, volleyListener, errorListener)
     configure?.invoke(request)
     this.
     add(request)

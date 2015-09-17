@@ -6,8 +6,8 @@ import com.droidtitan.volley.fragment.NetworkImageFragment
 import dagger.Component
 import javax.inject.Singleton
 
-Singleton
-Component(modules = arrayOf(RestModule::class))
+@Singleton
+@Component(modules = arrayOf(RestModule::class))
 public interface AppComponent {
     fun inject(f: ImageLoaderFragment)
 

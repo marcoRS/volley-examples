@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 public class Weather {
 
     /** In celcius */
-    SerializedName("temperatura")
+    @SerializedName("temperatura")
     public var temperature: String? = null
 
     /**
@@ -15,6 +15,6 @@ public class Weather {
      * lluvia_moderada_dia, lluvia_moderada_noche, lluvia_intensa_dia, lluvia_intensa_noche o
      * desconocido
      */
-    SerializedName("condicion")
+    @SerializedName("condicion")
     public var condition: String? = null
 }

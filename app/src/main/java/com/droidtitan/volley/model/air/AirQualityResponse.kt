@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 public class AirQualityResponse {
 
-    SerializedName("consulta")
+    @SerializedName("consulta")
     var airQualityHolder: AirQualityHolder? = null
 
     public fun category(): String? {

@@ -1,7 +1,5 @@
 package com.droidtitan.volley.model.air
 
-import com.droidtitan.volley.model.air.Zone
-
 public class Zones {
 
     public var noroeste: Zone? = null

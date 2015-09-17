@@ -15,9 +15,7 @@ import javax.inject.Inject
 import kotlin.properties.Delegates
 
 public class NetworkImageFragment : Fragment() {
-
-    var loader: ImageLoader by Delegates.notNull()
-        @Inject set
+    @Inject lateinit val loader: ImageLoader
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, state: Bundle?): View? {
         setActionBarTitle(R.string.networkimage_example)
@@ -33,6 +31,6 @@ public class NetworkImageFragment : Fragment() {
     }
 
     companion object {
-        public val TAG: String = javaClass<NetworkImageFragment>().getName()
+        public val TAG: String = NetworkImageFragment::class.java.name
     }
 }

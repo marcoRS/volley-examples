@@ -26,7 +26,7 @@ public class RestModule(val application: Application) {
 
         val factory = OkUrlFactory(OkHttpClient())
         val hurlStack = object : HurlStack() {
-            @throws(IOException::class) override fun createConnection(url: URL): HttpURLConnection {
+            @Throws(IOException::class) override fun createConnection(url: URL): HttpURLConnection {
                 return factory.open(url)
             }
         }
@@ -42,11 +42,9 @@ public class RestModule(val application: Application) {
         val maxSize = (Runtime.getRuntime().maxMemory() / imageSize / count).toInt()
 
         val lruCache = object : LruCache<String, Bitmap>(maxSize), ImageCache {
-            override fun sizeOf(key: String?, value: Bitmap?) = value!!.getRowBytes() * value.getHeight()
+            override fun sizeOf(key: String?, value: Bitmap?) = value!!.rowBytes * value.height
             override fun getBitmap(url: String): Bitmap? = get(url)
-            override fun putBitmap(url: String, bitmap: Bitmap) {
-                put(url, bitmap)
-            }
+            override fun putBitmap(url: String, bitmap: Bitmap) = put(url, bitmap).let {  }
         }
 
         return ImageLoader(queue, lruCache)

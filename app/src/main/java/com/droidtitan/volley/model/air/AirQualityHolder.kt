@@ -4,18 +4,18 @@ import com.google.gson.annotations.SerializedName
 
 public class AirQualityHolder {
 
-    SerializedName("reporte")
+    @SerializedName("reporte")
     var hourOfReport: Int = 0
 
-    SerializedName("calidad")
+    @SerializedName("calidad")
     var airQuality: AirQuality? = null
 
-    SerializedName("clima")
+    @SerializedName("clima")
     var weather: Weather? = null
 
-    SerializedName("uv")
+    @SerializedName("uv")
     var uv: Uv? = null
 
-    SerializedName("zonas")
+    @SerializedName("zonas")
     var zones: Zones? = null
 }

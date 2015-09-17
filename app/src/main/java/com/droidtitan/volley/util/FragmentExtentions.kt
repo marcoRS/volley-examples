@@ -8,11 +8,11 @@ import com.droidtitan.volley.App
 import com.droidtitan.volley.di.AppComponent
 
 fun Fragment.setActionBarTitle(@StringRes title: Int) {
-    (getActivity() as? AppCompatActivity)?.getSupportActionBar()?.setTitle(title)
+    (activity as? AppCompatActivity)?.supportActionBar?.setTitle(title)
 }
 
-fun Fragment.withComponent(): AppComponent = (getActivity().getApplication() as App).component()
+fun Fragment.withComponent(): AppComponent = (activity.application as App).component()
 
-fun Fragment.showSnackbar(message: String) = Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show()
+fun Fragment.showSnackbar(message: String) = Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
 
 fun String.firstToUpperCase() = if (isEmpty()) this else first().toUpperCase() + substring(1)

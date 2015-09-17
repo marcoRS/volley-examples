@@ -19,8 +19,7 @@ import kotlin.properties.Delegates
 
 public class ImageLoaderFragment : Fragment() {
 
-    var loader: ImageLoader by Delegates.notNull()
-        @Inject set
+    @Inject lateinit val loader: ImageLoader
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, state: Bundle?): View? {
         setActionBarTitle(R.string.image_loader_example)
@@ -31,15 +30,15 @@ public class ImageLoaderFragment : Fragment() {
 
         loader.get(Api.sfMapUrl(), object : ImageListener {
             override fun onResponse(container: ImageContainer, isImmediate: Boolean) {
-                container.getBitmap()?.let {
-                    root.setDisplayedChild(1)
+                container.bitmap?.let {
+                    root.displayedChild = 1
                     map.setImageBitmap(it)
                 }
             }
 
             override fun onErrorResponse(error: VolleyError) {
-                root.setDisplayedChild(2)
-                showSnackbar(error.toString(getResources()))
+                root.displayedChild = 2
+                showSnackbar(error.toString(resources))
             }
         })
 
@@ -47,6 +46,6 @@ public class ImageLoaderFragment : Fragment() {
     }
 
     companion object {
-        public val TAG: String = javaClass<ImageLoaderFragment>().getName()
+        public val TAG: String = ImageLoaderFragment::class.java.name
     }
 }

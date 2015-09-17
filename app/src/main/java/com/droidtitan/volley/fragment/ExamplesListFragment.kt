@@ -16,10 +16,10 @@ public class ExamplesListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, state: Bundle?): View? {
         setActionBarTitle(R.string.app_name)
 
-        val listView = ListView(getActivity())
-        val adapter = ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, getExamples())
+        val listView = ListView(activity)
+        val adapter = ArrayAdapter(activity, android.R.layout.simple_list_item_1, getExamples())
 
-        listView.setAdapter(adapter)
+        listView.adapter = adapter
         listView.setOnItemClickListener { a, v, p, i ->
             val t = listOf(GsonRequestFragment.TAG, NetworkImageFragment.TAG, ImageLoaderFragment.TAG).get(p)
             Bus.post(AttachFragmentEvent(t))
