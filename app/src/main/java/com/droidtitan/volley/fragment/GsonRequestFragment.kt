@@ -14,7 +14,6 @@ import com.droidtitan.volley.model.air.AirQualityResponse
 import com.droidtitan.volley.util.*
 import com.droidtitan.volley.util.volley.*
 import javax.inject.Inject
-import kotlin.properties.Delegates
 
 public class GsonRequestFragment : Fragment() {
     val flipper: ViewFlipper by bindView(R.id.gsonFlipper)
@@ -47,7 +46,7 @@ public class GsonRequestFragment : Fragment() {
         super.onViewCreated(view, state)
         /** Any method that accepts a one method interface can use this { } convention. */
         flipper.findViewById(R.id.retryButton).setOnClickListener { getAirQuality() }
-        if (response == null) getAirQuality()
+        response ?: getAirQuality()
     }
 
     private fun getAirQuality() {

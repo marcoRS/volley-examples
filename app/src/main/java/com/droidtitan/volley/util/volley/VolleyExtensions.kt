@@ -12,14 +12,13 @@ import java.nio.charset.Charset
  * @param res Android resources for fetching a string.
  * @return A user readable message describing the Http failure.
  */
-public fun VolleyError.toString(res: Resources): String {
-    when {
-        isApiError() -> return getApiErrorMessage(res)
-        isNetworkError() -> return res.getString(R.string.no_data_connection)
-        this is TimeoutError -> return res.getString(R.string.generic_server_down)
-        else -> return res.getString(R.string.generic_error)
-    }
+public fun VolleyError.toString(res: Resources): String = when {
+    isApiError() -> getApiErrorMessage(res)
+    isNetworkError() -> res.getString(R.string.no_data_connection)
+    this is TimeoutError -> res.getString(R.string.generic_server_down)
+    else -> res.getString(R.string.generic_error)
 }
+
 
 private fun VolleyError.isNetworkError() = this is NetworkError || this is NoConnectionError
 
