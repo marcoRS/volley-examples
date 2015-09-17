@@ -27,10 +27,10 @@ public class GsonRequestTests {
 
     @Before fun setUp() {
         val url = "http://responseUrl.com"
-        val clazz = javaClass<AirQualityResponse>()
+        val clazz = AirQualityResponse::class.java
 
-        val listener = mock(javaClass<Listener<AirQualityResponse>>())
-        errorListener = mock(javaClass<ErrorListener>())
+        val listener = mock(Listener::class.java) as Listener<AirQualityResponse>
+        errorListener = mock(ErrorListener::class.java)
         request = GsonRequest(url, clazz, listener, errorListener)
     }
 
@@ -41,6 +41,6 @@ public class GsonRequestTests {
     }
 
     @Test fun testAcceptHeaderisAdded() {
-        assertEquals("application/json", request.getHeaders().get("Accept"))
+        assertEquals("application/json", request.headers.get("Accept"))
     }
 }

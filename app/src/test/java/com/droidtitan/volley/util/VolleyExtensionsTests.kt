@@ -16,7 +16,7 @@ public class VolleyExtensionsTests {
         val expected = "No connection. Please try again."
         val error = NetworkError(NetworkResponse(404, null, null, true))
 
-        val res = Mockito.mock(javaClass<Resources>())
+        val res = Mockito.mock(Resources::class.java)
         `when`(res.getString(anyInt())).thenReturn(expected)
 
         assertEquals(expected, error.toString(res))
