@@ -21,7 +21,7 @@ public class ExamplesListFragment : Fragment() {
 
         listView.adapter = adapter
         listView.setOnItemClickListener { a, v, p, i ->
-            val t = listOf(GsonRequestFragment.TAG, NetworkImageFragment.TAG, ImageLoaderFragment.TAG).get(p)
+            val t = listOf(GsonRequestFragment.TAG, NetworkImageFragment.TAG, ImageLoaderFragment.TAG)[p]
             Bus.post(AttachFragmentEvent(t))
         }
 

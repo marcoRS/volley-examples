@@ -33,12 +33,12 @@ private fun VolleyError.getApiErrorMessage(res: Resources): String {
             422, 401 -> {
                 try {
                     val json = String(networkResponse.data, Charset.defaultCharset())
-                    val type = object : TypeToken<Map<String, String>>() {}.getType()
+                    val type = object : TypeToken<Map<String, String>>() {}.type
 
                     val map = Gson().fromJson<Map<String, String>>(json, type)
-                    return map.get(Api.ERROR_KEY) ?: res.getString(R.string.generic_error)
+                    return map[Api.ERROR_KEY] ?: res.getString(R.string.generic_error)
                 } catch (e: Exception) {
-                    return getMessage() ?: res.getString(R.string.generic_error)
+                    return message ?: res.getString(R.string.generic_error)
                 }
             }
             else -> return res.getString(R.string.generic_server_down)

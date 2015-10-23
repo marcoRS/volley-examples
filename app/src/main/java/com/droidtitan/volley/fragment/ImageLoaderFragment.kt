@@ -19,7 +19,7 @@ import kotlin.properties.Delegates
 
 public class ImageLoaderFragment : Fragment() {
 
-    @Inject lateinit val loader: ImageLoader
+    @Inject lateinit var loader: ImageLoader
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, state: Bundle?): View? {
         setActionBarTitle(R.string.image_loader_example)

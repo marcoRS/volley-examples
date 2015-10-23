@@ -15,7 +15,7 @@ import javax.inject.Inject
 import kotlin.properties.Delegates
 
 public class NetworkImageFragment : Fragment() {
-    @Inject lateinit val loader: ImageLoader
+    @Inject lateinit var loader: ImageLoader
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, state: Bundle?): View? {
         setActionBarTitle(R.string.networkimage_example)

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.ViewFlipper
+import com.droidtitan.volley.util.bindView
 import com.android.volley.RequestQueue
 import com.android.volley.VolleyError
 import com.droidtitan.volley.R
@@ -21,7 +22,7 @@ public class GsonRequestFragment : Fragment() {
     val temperature: TextView by bindView(R.id.temperatureTextView)
 
     var response: AirQualityResponse? = null
-    @Inject lateinit val queue: RequestQueue
+    @Inject lateinit var queue: RequestQueue
 
     override fun onResume() {
         super.onResume()
