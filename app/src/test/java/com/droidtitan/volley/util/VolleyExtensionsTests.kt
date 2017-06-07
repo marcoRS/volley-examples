@@ -4,11 +4,11 @@ import android.content.res.Resources
 import com.android.volley.NetworkError
 import com.android.volley.NetworkResponse
 import com.droidtitan.volley.util.volley.toString
+import com.nhaarman.mockito_kotlin.doReturn
+import com.nhaarman.mockito_kotlin.mock
 import junit.framework.Assert.assertEquals
 import org.junit.Test
-import org.mockito.Matchers.anyInt
-import org.mockito.Mockito
-import org.mockito.Mockito.`when`
+import org.mockito.ArgumentMatchers
 
 class VolleyExtensionsTests {
 
@@ -16,8 +16,9 @@ class VolleyExtensionsTests {
     val expected = "No connection. Please try again."
     val error = NetworkError(NetworkResponse(404, null, null, true))
 
-    val res = Mockito.mock(Resources::class.java)
-    `when`(res.getString(anyInt())).thenReturn(expected)
+    val res = mock<Resources> {
+      on { getString(ArgumentMatchers.anyInt()) } doReturn expected
+    }
 
     assertEquals(expected, error.toString(res))
   }
