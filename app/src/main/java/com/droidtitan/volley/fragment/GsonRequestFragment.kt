@@ -52,9 +52,12 @@ class GsonRequestFragment : Fragment() {
   private fun getAirQuality() {
     flipper.displayedChild = 0
 
-    val listener = Listener<AirQualityResponse> { e, r ->
-      e?.let { Bus.post(AirQualityEvent(error = e)) }
-      r?.let { Bus.post(AirQualityEvent(response = r)) }
+    val listener = object : Listener<AirQualityResponse> {
+      override fun onCompleted(volleyError: VolleyError?, apiResponse: AirQualityResponse?) {
+        volleyError?.let { Bus.post(AirQualityEvent(error = volleyError)) }
+        apiResponse?.let { Bus.post(AirQualityEvent(response = apiResponse)) }
+      }
+
     }
 
     queue.add(listener, Api.airQualityUrl(), { it.dontCache().withTag(AIR_QUALITY) })

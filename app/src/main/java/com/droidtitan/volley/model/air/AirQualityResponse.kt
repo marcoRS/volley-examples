@@ -14,5 +14,4 @@ class AirQualityResponse {
   fun getTemperature(): String? {
     return airQualityHolder?.weather?.temperature
   }
-
 }
