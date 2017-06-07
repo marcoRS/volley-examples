@@ -7,11 +7,10 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(RestModule::class))
-public interface AppComponent {
-    fun inject(f: ImageLoaderFragment)
+@Component(modules = arrayOf(RestModule::class)) interface AppComponent {
+  fun inject(f: ImageLoaderFragment)
 
-    fun inject(f: NetworkImageFragment)
+  fun inject(f: NetworkImageFragment)
 
-    fun inject(f: GsonRequestFragment)
+  fun inject(f: GsonRequestFragment)
 }

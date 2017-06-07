@@ -1,7 +1,6 @@
 package com.droidtitan.volley.di
 
 import android.app.Application
-import android.content.Context
 import android.graphics.Bitmap
 import android.support.v4.util.LruCache
 import com.android.volley.RequestQueue
@@ -18,35 +17,32 @@ import java.net.HttpURLConnection
 import java.net.URL
 import javax.inject.Singleton
 
-@Module
-public class RestModule(val application: Application) {
+@Module class RestModule(val application: Application) {
 
-    @Singleton @Provides
-    public fun provideQueue(): RequestQueue {
+  @Singleton @Provides fun provideQueue(): RequestQueue {
 
-        val factory = OkUrlFactory(OkHttpClient())
-        val hurlStack = object : HurlStack() {
-            @Throws(IOException::class) override fun createConnection(url: URL): HttpURLConnection {
-                return factory.open(url)
-            }
-        }
-
-        return Volley.newRequestQueue(application, hurlStack)
+    val factory = OkUrlFactory(OkHttpClient())
+    val hurlStack = object : HurlStack() {
+      @Throws(IOException::class) override fun createConnection(url: URL): HttpURLConnection {
+        return factory.open(url)
+      }
     }
 
-    @Singleton @Provides
-    public fun provideImageLoader(queue: RequestQueue): ImageLoader {
+    return Volley.newRequestQueue(application, hurlStack)
+  }
 
-        val imageSize = 1024L
-        val count = 8L
-        val maxSize = (Runtime.getRuntime().maxMemory() / imageSize / count).toInt()
+  @Singleton @Provides fun provideImageLoader(queue: RequestQueue): ImageLoader {
 
-        val lruCache = object : LruCache<String, Bitmap>(maxSize), ImageCache {
-            override fun sizeOf(key: String?, value: Bitmap?) = value!!.rowBytes * value.height
-            override fun getBitmap(url: String): Bitmap? = get(url)
-            override fun putBitmap(url: String, bitmap: Bitmap) = put(url, bitmap).let {  }
-        }
+    val imageSize = 1024L
+    val count = 8L
+    val maxSize = (Runtime.getRuntime().maxMemory() / imageSize / count).toInt()
 
-        return ImageLoader(queue, lruCache)
+    val lruCache = object : LruCache<String, Bitmap>(maxSize), ImageCache {
+      override fun sizeOf(key: String?, value: Bitmap?) = value!!.rowBytes * value.height
+      override fun getBitmap(url: String): Bitmap? = get(url)
+      override fun putBitmap(url: String, bitmap: Bitmap) = put(url, bitmap).let { }
     }
+
+    return ImageLoader(queue, lruCache)
+  }
 }

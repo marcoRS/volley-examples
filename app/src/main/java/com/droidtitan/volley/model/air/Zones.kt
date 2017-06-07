@@ -2,13 +2,13 @@ package com.droidtitan.volley.model.air
 
 public class Zones {
 
-    public var noroeste: Zone? = null
+  public var noroeste: Zone? = null
 
-    public var noreste: Zone? = null
+  public var noreste: Zone? = null
 
-    public var centro: Zone? = null
+  public var centro: Zone? = null
 
-    public var suroeste: Zone? = null
+  public var suroeste: Zone? = null
 
-    public var sureste: Zone? = null
+  public var sureste: Zone? = null
 }

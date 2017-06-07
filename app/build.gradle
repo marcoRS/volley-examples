@@ -1,54 +1,53 @@
-apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+  compileSdkVersion 25
+  buildToolsVersion "25.0.2"
 
-    defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionName "1.0.0"
-        versionCode 1
-    }
+  defaultConfig {
+    minSdkVersion 15
+    targetSdkVersion 25
+    versionName "1.0.0"
+    versionCode 1
+  }
 
-    lintOptions {
-        abortOnError false
-    }
+  lintOptions {
+    abortOnError false
+  }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-        }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
     }
+  }
 }
 
 repositories {
-    jcenter()
+  jcenter()
 }
 
-def support_version = "23.0.1"
+def support_version = "25.2.0"
 def okhttp_version = "2.4.0"
 def dagger_version = "2.0.1"
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "com.android.support:appcompat-v7:$support_version"
-    compile "com.android.support:design:$support_version"
+  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  compile "com.android.support:appcompat-v7:$support_version"
+  compile "com.android.support:design:$support_version"
 
-    compile 'com.mcxiaoke.volley:library:1.0.16'
-    compile 'com.google.code.gson:gson:2.3.1'
-    compile 'de.greenrobot:eventbus:2.4.0'
-    compile "com.squareup.okhttp:okhttp:$okhttp_version"
-    compile "com.squareup.okhttp:okhttp-urlconnection:$okhttp_version"
+  compile 'com.mcxiaoke.volley:library:1.0.16'
+  compile 'com.google.code.gson:gson:2.7'
+  compile 'de.greenrobot:eventbus:2.4.0'
+  compile "com.squareup.okhttp:okhttp:$okhttp_version"
+  compile "com.squareup.okhttp:okhttp-urlconnection:$okhttp_version"
 
-    compile "com.google.dagger:dagger:$dagger_version"
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
-    provided 'org.glassfish:javax.annotation:10.0-b28'
+  compile "com.google.dagger:dagger:$dagger_version"
+  kapt "com.google.dagger:dagger-compiler:$dagger_version"
+  provided 'org.glassfish:javax.annotation:10.0-b28'
 
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:2.0.31-beta'
-    testCompile 'org.robolectric:robolectric:3.0'
+  testCompile 'junit:junit:4.12'
+  testCompile 'org.mockito:mockito-core:2.0.31-beta'
+  testCompile 'org.robolectric:robolectric:3.3.2'
 }

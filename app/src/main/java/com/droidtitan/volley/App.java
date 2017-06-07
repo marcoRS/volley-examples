@@ -8,16 +8,16 @@ import com.droidtitan.volley.di.RestModule;
 
 public class App extends Application {
 
-    private AppComponent component;
+  private AppComponent component;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        /** The class creating a component has to be written in java for Dagger 2 to work. */
-        component = DaggerAppComponent.builder().restModule(new RestModule(this)).build();
-    }
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    /** The class creating a component has to be written in java for Dagger 2 to work. */
+    component = DaggerAppComponent.builder().restModule(new RestModule(this)).build();
+  }
 
-    public AppComponent component() {
-        return component;
-    }
+  public AppComponent component() {
+    return component;
+  }
 }

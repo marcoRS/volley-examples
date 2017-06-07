@@ -11,26 +11,26 @@ import com.droidtitan.volley.R
 import com.droidtitan.volley.util.Bus
 import com.droidtitan.volley.util.setActionBarTitle
 
-public class ExamplesListFragment : Fragment() {
+class ExamplesListFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, state: Bundle?): View? {
-        setActionBarTitle(R.string.app_name)
+  override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, state: Bundle?): View? {
+    setActionBarTitle(R.string.app_name)
 
-        val listView = ListView(activity)
-        val adapter = ArrayAdapter(activity, android.R.layout.simple_list_item_1, getExamples())
+    val listView = ListView(activity)
+    val adapter = ArrayAdapter(activity, android.R.layout.simple_list_item_1, getExamples())
 
-        listView.adapter = adapter
-        listView.setOnItemClickListener { a, v, p, i ->
-            val t = listOf(GsonRequestFragment.TAG, NetworkImageFragment.TAG, ImageLoaderFragment.TAG)[p]
-            Bus.post(AttachFragmentEvent(t))
-        }
-
-        return listView
+    listView.adapter = adapter
+    listView.setOnItemClickListener { _, _, p, _ ->
+      val t = listOf(GsonRequestFragment.TAG, NetworkImageFragment.TAG, ImageLoaderFragment.TAG)[p]
+      Bus.post(AttachFragmentEvent(t))
     }
 
-    fun getExamples(): List<String> = listOf(getString(R.string.json_request_example),
-            getString(R.string.networkimage_example),
-            getString(R.string.image_loader_example))
+    return listView
+  }
 
-    public class AttachFragmentEvent(val fragmentTag: String)
+  fun getExamples(): List<String> = listOf(getString(R.string.json_request_example),
+    getString(R.string.networkimage_example),
+    getString(R.string.image_loader_example))
+
+  class AttachFragmentEvent(val fragmentTag: String)
 }

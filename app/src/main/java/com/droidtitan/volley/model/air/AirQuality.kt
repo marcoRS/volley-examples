@@ -2,14 +2,11 @@ package com.droidtitan.volley.model.air
 
 import com.google.gson.annotations.SerializedName
 
-public class AirQuality {
+class AirQuality {
 
-    @SerializedName("categoria")
-    public var category: String? = null
+  @SerializedName("categoria") var category: String? = null
 
-    @SerializedName("color")
-    public var color: String? = null
+  @SerializedName("color") var color: String? = null
 
-    @SerializedName("recomendaciones")
-    public var recommendation: String? = null
+  @SerializedName("recomendaciones") var recommendation: String? = null
 }
