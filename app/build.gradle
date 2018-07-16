@@ -1,9 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
   compileSdkVersion 25
-  buildToolsVersion "25.0.2"
+  buildToolsVersion "27.0.3"
 
   defaultConfig {
     minSdkVersion 15
@@ -24,31 +25,36 @@ android {
   }
 }
 
-repositories {
-  jcenter()
+kapt {
+  generateStubs = true
 }
 
-def support_version = "25.3.1"
+repositories {
+  jcenter()
+  google()
+}
+
+def support_version = "25.4.0"
 def okhttp_version = "2.4.0"
 def dagger_version = "2.5"
 
 dependencies {
-  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  compile "com.android.support:appcompat-v7:$support_version"
-  compile "com.android.support:design:$support_version"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation "com.android.support:appcompat-v7:$support_version"
+  implementation "com.android.support:design:$support_version"
 
-  compile 'com.mcxiaoke.volley:library:1.0.16'
-  compile 'com.google.code.gson:gson:2.7'
-  compile 'de.greenrobot:eventbus:2.4.0'
-  compile "com.squareup.okhttp:okhttp:$okhttp_version"
-  compile "com.squareup.okhttp:okhttp-urlconnection:$okhttp_version"
+  implementation 'com.mcxiaoke.volley:library:1.0.16'
+  implementation 'com.google.code.gson:gson:2.8.0'
+  implementation 'de.greenrobot:eventbus:2.4.0'
+  implementation "com.squareup.okhttp:okhttp:$okhttp_version"
+  implementation "com.squareup.okhttp:okhttp-urlconnection:$okhttp_version"
 
-  compile "com.google.dagger:dagger:$dagger_version"
+  implementation "com.google.dagger:dagger:$dagger_version"
   kapt "com.google.dagger:dagger-compiler:$dagger_version"
-  provided 'org.glassfish:javax.annotation:10.0-b28'
+  compileOnly 'org.glassfish:javax.annotation:10.0-b28'
 
-  testCompile 'junit:junit:4.12'
-  testCompile 'org.mockito:mockito-core:2.7.22'
-  testCompile "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
-  testCompile 'org.robolectric:robolectric:3.3.2'
+  testImplementation 'junit:junit:4.12'
+  testImplementation 'org.mockito:mockito-core:2.7.22'
+  testImplementation "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
+  testImplementation 'org.robolectric:robolectric:3.3.2'
 }

@@ -37,7 +37,7 @@ import kotlin.properties.Delegates
     verify(errorListener, times(1)).onErrorResponse(error)
   }
 
-  @Test fun testAcceptHeaderisAdded() {
-    assertEquals("application/json", request.headers.get("Accept"))
+  @Test fun testAcceptHeaderIsAdded() {
+    assertEquals("application/json", request.headers["Accept"])
   }
 }
