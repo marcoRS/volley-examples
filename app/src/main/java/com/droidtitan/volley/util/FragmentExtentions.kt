@@ -12,7 +12,7 @@ fun Fragment.setActionBarTitle(@StringRes title: Int) {
   (activity as? AppCompatActivity)?.supportActionBar?.setTitle(title)
 }
 
-fun Fragment.withComponent(): AppComponent = (activity.application as App).component()
+fun Fragment.withComponent(): AppComponent = (activity?.application as App).component()
 
 fun Fragment.showSnackbar(message: String) {
   val view = view as View

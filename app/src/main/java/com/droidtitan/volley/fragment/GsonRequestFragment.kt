@@ -33,19 +33,19 @@ class GsonRequestFragment : Fragment() {
     Bus.unregister(this)
   }
 
-  override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, state: Bundle?): View? {
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, state: Bundle?): View? {
     /** Extension functions add class functionality without inheriting they are resolved statically */
     setActionBarTitle(R.string.json_request_example)
     withComponent().inject(this)
 
     /** !! operator will return a non-null value, otherwise throws a NPE */
-    return inflater!!.inflate(R.layout.fragment_gson_request, container, false)
+    return inflater.inflate(R.layout.fragment_gson_request, container, false)
   }
 
-  override fun onViewCreated(view: View?, state: Bundle?) {
+  override fun onViewCreated(view: View, state: Bundle?) {
     super.onViewCreated(view, state)
     /** Any method that accepts a one method interface can use this { } convention. */
-    flipper.findViewById(R.id.retryButton).setOnClickListener { getAirQuality() }
+    flipper.findViewById<View>(R.id.retryButton).setOnClickListener { getAirQuality() }
     response ?: getAirQuality()
   }
 

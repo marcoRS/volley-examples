@@ -38,7 +38,7 @@ import javax.inject.Singleton
     val maxSize = (Runtime.getRuntime().maxMemory() / imageSize / count).toInt()
 
     val lruCache = object : LruCache<String, Bitmap>(maxSize), ImageCache {
-      override fun sizeOf(key: String?, value: Bitmap?) = value!!.rowBytes * value.height
+      override fun sizeOf(key: String, value: Bitmap) = value.rowBytes * value.height
       override fun getBitmap(url: String): Bitmap? = get(url)
       override fun putBitmap(url: String, bitmap: Bitmap) = put(url, bitmap).let { }
     }

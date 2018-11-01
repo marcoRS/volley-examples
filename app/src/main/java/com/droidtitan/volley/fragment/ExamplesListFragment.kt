@@ -13,11 +13,11 @@ import com.droidtitan.volley.util.setActionBarTitle
 
 class ExamplesListFragment : Fragment() {
 
-  override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, state: Bundle?): View? {
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, state: Bundle?): View? {
     setActionBarTitle(R.string.app_name)
 
     val listView = ListView(activity)
-    val adapter = ArrayAdapter(activity, android.R.layout.simple_list_item_1, getExamples())
+    val adapter = ArrayAdapter(activity!!, android.R.layout.simple_list_item_1, getExamples())
 
     listView.adapter = adapter
     listView.setOnItemClickListener { _, _, position, _ ->
@@ -28,7 +28,7 @@ class ExamplesListFragment : Fragment() {
     return listView
   }
 
-  fun getExamples(): List<String> = listOf(getString(R.string.json_request_example),
+  private fun getExamples(): List<String> = listOf(getString(R.string.json_request_example),
     getString(R.string.networkimage_example),
     getString(R.string.image_loader_example))
 

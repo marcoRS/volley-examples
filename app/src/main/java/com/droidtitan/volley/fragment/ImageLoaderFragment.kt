@@ -23,11 +23,11 @@ class ImageLoaderFragment : Fragment() {
 
   @Inject lateinit var loader: ImageLoader
 
-  override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, state: Bundle?): View? {
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, state: Bundle?): View? {
     setActionBarTitle(R.string.image_loader_example)
     withComponent().inject(this)
 
-    val root = inflater!!.inflate(R.layout.fragment_image_loader, container, false) as ViewFlipper
+    val root = inflater.inflate(R.layout.fragment_image_loader, container, false) as ViewFlipper
     val map = root.findViewById(R.id.mapImageView) as ImageView
 
     loader.get(Api.sfMapUrl(), object : ImageListener {
