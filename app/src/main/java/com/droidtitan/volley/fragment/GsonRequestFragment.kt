@@ -1,7 +1,7 @@
 package com.droidtitan.volley.fragment
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -93,7 +93,7 @@ class GsonRequestFragment : Fragment() {
 
   /** Companion objects are used to create static properties. */
   companion object {
-    val TAG: String = GsonRequestFragment::class.java.name
+    @JvmField val TAG: String = GsonRequestFragment::class.java.name
     val AIR_QUALITY: String = "AirQualityTag"
     val CELCIUS: String = " \u2103"
   }
