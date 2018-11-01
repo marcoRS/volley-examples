@@ -1,12 +1,12 @@
 package com.droidtitan.volley.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ViewFlipper
+import androidx.fragment.app.Fragment
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.ImageLoader
 import com.android.volley.toolbox.ImageLoader.ImageContainer
@@ -16,16 +16,14 @@ import com.droidtitan.volley.util.Api
 import com.droidtitan.volley.util.setActionBarTitle
 import com.droidtitan.volley.util.showSnackbar
 import com.droidtitan.volley.util.volley.toString
-import com.droidtitan.volley.util.withComponent
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
 
 class ImageLoaderFragment : Fragment() {
 
-  @Inject lateinit var loader: ImageLoader
+  private val loader: ImageLoader by inject()
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, state: Bundle?): View? {
     setActionBarTitle(R.string.image_loader_example)
-    withComponent().inject(this)
 
     val root = inflater.inflate(R.layout.fragment_image_loader, container, false) as ViewFlipper
     val map = root.findViewById(R.id.mapImageView) as ImageView

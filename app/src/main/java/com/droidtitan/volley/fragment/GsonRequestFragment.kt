@@ -1,19 +1,19 @@
 package com.droidtitan.volley.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.ViewFlipper
+import androidx.fragment.app.Fragment
 import com.android.volley.RequestQueue
 import com.android.volley.VolleyError
 import com.droidtitan.volley.R
 import com.droidtitan.volley.model.air.AirQualityResponse
 import com.droidtitan.volley.util.*
 import com.droidtitan.volley.util.volley.*
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
 
 class GsonRequestFragment : Fragment() {
   val flipper: ViewFlipper by bindView(R.id.gsonFlipper)
@@ -21,7 +21,7 @@ class GsonRequestFragment : Fragment() {
   val temperature: TextView by bindView(R.id.temperatureTextView)
 
   var response: AirQualityResponse? = null
-  @Inject lateinit var queue: RequestQueue
+  val queue: RequestQueue by inject()
 
   override fun onResume() {
     super.onResume()
@@ -36,7 +36,6 @@ class GsonRequestFragment : Fragment() {
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, state: Bundle?): View? {
     /** Extension functions add class functionality without inheriting they are resolved statically */
     setActionBarTitle(R.string.json_request_example)
-    withComponent().inject(this)
 
     /** !! operator will return a non-null value, otherwise throws a NPE */
     return inflater.inflate(R.layout.fragment_gson_request, container, false)
@@ -93,7 +92,8 @@ class GsonRequestFragment : Fragment() {
 
   /** Companion objects are used to create static properties. */
   companion object {
-    @JvmField val TAG: String = GsonRequestFragment::class.java.name
+    @JvmField
+    val TAG: String = GsonRequestFragment::class.java.name
     val AIR_QUALITY: String = "AirQualityTag"
     val CELCIUS: String = " \u2103"
   }

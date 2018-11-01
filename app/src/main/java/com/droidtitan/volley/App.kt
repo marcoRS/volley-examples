@@ -1,21 +1,12 @@
 package com.droidtitan.volley
 
 import android.app.Application
-
-import com.droidtitan.volley.di.AppComponent
-import com.droidtitan.volley.di.DaggerAppComponent
-import com.droidtitan.volley.di.RestModule
+import org.koin.android.ext.android.startKoin
 
 class App : Application() {
 
-  private lateinit var component: AppComponent
-
   override fun onCreate() {
     super.onCreate()
-    component = DaggerAppComponent.builder().restModule(RestModule(this)).build()
-  }
-
-  fun component(): AppComponent {
-    return component
+    startKoin(this, listOf(restModule))
   }
 }

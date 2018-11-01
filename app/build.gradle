@@ -33,9 +33,7 @@ repositories {
   google()
 }
 
-def support_version = "28.0.0"
 def okhttp_version = "2.4.0"
-def dagger_version = "2.16"
 
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -48,8 +46,7 @@ dependencies {
   implementation "com.squareup.okhttp:okhttp:$okhttp_version"
   implementation "com.squareup.okhttp:okhttp-urlconnection:$okhttp_version"
 
-  implementation "com.google.dagger:dagger:$dagger_version"
-  kapt "com.google.dagger:dagger-compiler:$dagger_version"
+  implementation 'org.koin:koin-android-scope:1.0.1'
   compileOnly 'org.glassfish:javax.annotation:10.0-b28'
 
   testImplementation 'junit:junit:4.12'

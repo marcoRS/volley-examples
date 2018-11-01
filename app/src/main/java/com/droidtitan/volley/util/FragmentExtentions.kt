@@ -1,18 +1,14 @@
 package com.droidtitan.volley.util
 
-import androidx.annotation.StringRes
-import com.google.android.material.snackbar.Snackbar
-import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
-import com.droidtitan.volley.App
-import com.droidtitan.volley.di.AppComponent
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 
 fun Fragment.setActionBarTitle(@StringRes title: Int) {
   (activity as? AppCompatActivity)?.supportActionBar?.setTitle(title)
 }
-
-fun Fragment.withComponent(): AppComponent = (activity?.application as App).component()
 
 fun Fragment.showSnackbar(message: String) {
   val view = view as View
