@@ -10,7 +10,7 @@ class FragmentExtensiontests {
     val cases = arrayOf("volley examples", "m", " ", "Test", "")
     val expected = arrayOf("Volley examples", "M", " ", "Test", "")
 
-    for (i in 0..cases.size - 1) {
+    for (i in 0 until cases.size) {
       assertEquals(expected[i], cases[i].firstToUpperCase())
     }
   }
